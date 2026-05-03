@@ -1,3 +1,10 @@
-10 + 5;
-2 * 3 + 4;
-20 / 2 - 1;
+fun avalia : Int -> Bool;
+let avalia x = 
+  when ( x ) is
+    -1, 1 -> true ;
+    0     -> false ;
+    _     -> true ;
+  end;
+
+let r1 = avalia(-1);
+let r2 = avalia(0);

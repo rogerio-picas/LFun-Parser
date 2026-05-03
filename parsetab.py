@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftEQUALLESSGREATERleftSUMSUBTRACTIONleftPRODUCTBARARROW ASSIGN BAR COLON COMMA ELSE END EQUAL FALSE FUN GREATER ID IF INT IS LESS LET LPAREN PRODUCT RPAREN SEMICOLON SUBTRACTION SUM THEN TRUE T_BOOL T_INT UNDERSCORE WHENprograma : instrucao\n| programa instrucaoinstrucao : let_statement SEMICOLON\n| fun_statement SEMICOLON\n| when_statement SEMICOLON\n| expressao SEMICOLONlet_statement : LET ID COLON tipo ASSIGN expressao\n| LET ID ASSIGN expressaofun_statement : FUN ID COLON tipo ARROW tipowhen_statement : WHEN LPAREN expressao RPAREN IS cases ENDcases : case\n| cases casecase : pattern_list ARROW expressao SEMICOLON\n| UNDERSCORE ARROW expressao SEMICOLONpattern_list : pattern\n| pattern_list COMMA patternpattern : INT\n| TRUE\n| FALSE\n| IDexpressao : expressao SUM expressao\n| expressao SUBTRACTION expressao\n| expressao PRODUCT expressao\n| expressao BAR expressao\n| expressao EQUAL expressao\n| expressao LESS expressao\n| expressao GREATER expressaoexpressao : IF expressao THEN expressao ELSE expressaoexpressao : LPAREN expressao RPARENexpressao : INTexpressao : TRUE\n| FALSEexpressao : ID LPAREN expressao RPARENexpressao : IDtipo : T_INT\n| T_BOOLexpressao : SUBTRACTION expressao %prec PRODUCT'
+_lr_signature = 'leftEQUALLESSGREATERleftSUMSUBTRACTIONleftPRODUCTBARARROW ASSIGN BAR COLON COMMA ELSE END EQUAL FALSE FUN GREATER ID IF INT IS LESS LET LPAREN PRODUCT RPAREN SEMICOLON SUBTRACTION SUM THEN TRUE T_BOOL T_INT UNDERSCORE WHENprograma : instrucao\n| programa instrucaoinstrucao : let_statement SEMICOLON\n| fun_statement SEMICOLON\n| expressao SEMICOLONlet_statement : LET ID COLON tipo ASSIGN expressao\n| LET ID ASSIGN expressao\n| LET ID ID ASSIGN expressaofun_statement : FUN ID COLON tipo ARROW tipoexpressao : WHEN LPAREN expressao RPAREN IS cases ENDcases : case\n| cases casecase : pattern_list ARROW expressao SEMICOLON\n| UNDERSCORE ARROW expressao SEMICOLONpattern_list : pattern\n| pattern_list COMMA patternpattern : INT\n| SUBTRACTION INT\n| TRUE\n| FALSE\n| IDexpressao : expressao SUM expressao\n| expressao SUBTRACTION expressao\n| expressao PRODUCT expressao\n| expressao BAR expressao\n| expressao EQUAL expressao\n| expressao LESS expressao\n| expressao GREATER expressaoexpressao : IF expressao THEN expressao ELSE expressaoexpressao : LPAREN expressao RPARENexpressao : INTexpressao : TRUE\n| FALSEexpressao : ID LPAREN expressao RPARENexpressao : IDtipo : T_INT\n| T_BOOLexpressao : SUBTRACTION expressao %prec PRODUCT'
     
-_lr_action_items = {'LET':([0,1,2,17,18,19,20,21,],[7,7,-1,-2,-3,-4,-5,-6,]),'FUN':([0,1,2,17,18,19,20,21,],[9,9,-1,-2,-3,-4,-5,-6,]),'WHEN':([0,1,2,17,18,19,20,21,],[10,10,-1,-2,-3,-4,-5,-6,]),'IF':([0,1,2,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,61,76,78,],[13,13,-1,13,13,13,-2,-3,-4,-5,-6,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,]),'LPAREN':([0,1,2,8,10,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,61,76,78,],[11,11,-1,30,32,11,11,11,-2,-3,-4,-5,-6,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,]),'INT':([0,1,2,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,60,61,64,65,75,76,77,78,82,83,],[14,14,-1,14,14,14,-2,-3,-4,-5,-6,14,14,14,14,14,14,14,14,14,14,14,14,69,14,69,-11,-12,14,69,14,-13,-14,]),'TRUE':([0,1,2,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,60,61,64,65,75,76,77,78,82,83,],[15,15,-1,15,15,15,-2,-3,-4,-5,-6,15,15,15,15,15,15,15,15,15,15,15,15,70,15,70,-11,-12,15,70,15,-13,-14,]),'FALSE':([0,1,2,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,60,61,64,65,75,76,77,78,82,83,],[16,16,-1,16,16,16,-2,-3,-4,-5,-6,16,16,16,16,16,16,16,16,16,16,16,16,71,16,71,-11,-12,16,71,16,-13,-14,]),'ID':([0,1,2,7,9,11,12,13,17,18,19,20,21,22,23,24,25,26,27,28,30,32,44,49,58,60,61,64,65,75,76,77,78,82,83,],[8,8,-1,29,31,8,8,8,-2,-3,-4,-5,-6,8,8,8,8,8,8,8,8,8,8,8,8,72,8,72,-11,-12,8,72,8,-13,-14,]),'SUBTRACTION':([0,1,2,6,8,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,32,33,34,35,36,37,38,39,40,41,42,44,45,47,48,49,53,54,57,58,61,62,73,76,78,79,81,],[12,12,-1,23,-34,12,12,12,-30,-31,-32,-2,-3,-4,-5,-6,12,12,12,12,12,12,12,12,12,23,-37,23,-21,-22,-23,-24,23,23,23,12,23,23,-29,12,23,-33,23,12,12,23,23,12,12,23,23,]),'$end':([1,2,17,18,19,20,21,],[0,-1,-2,-3,-4,-5,-6,]),'SEMICOLON':([3,4,5,6,8,14,15,16,34,36,37,38,39,40,41,42,48,51,52,53,54,62,63,73,74,79,81,],[18,19,20,21,-34,-30,-31,-32,-37,-21,-22,-23,-24,-25,-26,-27,-29,-35,-36,-8,-33,-7,-9,-28,-10,82,83,]),'SUM':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[22,-34,-30,-31,-32,22,-37,22,-21,-22,-23,-24,22,22,22,22,22,-29,22,-33,22,22,22,22,22,]),'PRODUCT':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[24,-34,-30,-31,-32,24,-37,24,24,24,-23,-24,24,24,24,24,24,-29,24,-33,24,24,24,24,24,]),'BAR':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[25,-34,-30,-31,-32,25,-37,25,25,25,-23,-24,25,25,25,25,25,-29,25,-33,25,25,25,25,25,]),'EQUAL':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[26,-34,-30,-31,-32,26,-37,26,-21,-22,-23,-24,-25,-26,-27,26,26,-29,26,-33,26,26,26,26,26,]),'LESS':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[27,-34,-30,-31,-32,27,-37,27,-21,-22,-23,-24,-25,-26,-27,27,27,-29,27,-33,27,27,27,27,27,]),'GREATER':([6,8,14,15,16,33,34,35,36,37,38,39,40,41,42,45,47,48,53,54,57,62,73,79,81,],[28,-34,-30,-31,-32,28,-37,28,-21,-22,-23,-24,-25,-26,-27,28,28,-29,28,-33,28,28,28,28,28,]),'RPAREN':([8,14,15,16,33,34,36,37,38,39,40,41,42,45,47,48,54,73,],[-34,-30,-31,-32,48,-37,-21,-22,-23,-24,-25,-26,-27,54,56,-29,-33,-28,]),'THEN':([8,14,15,16,34,35,36,37,38,39,40,41,42,48,54,73,],[-34,-30,-31,-32,-37,49,-21,-22,-23,-24,-25,-26,-27,-29,-33,-28,]),'ELSE':([8,14,15,16,34,36,37,38,39,40,41,42,48,54,57,73,],[-34,-30,-31,-32,-37,-21,-22,-23,-24,-25,-26,-27,-29,-33,61,-28,]),'COLON':([29,31,],[43,46,]),'ASSIGN':([29,50,51,52,],[44,58,-35,-36,]),'T_INT':([43,46,59,],[51,51,51,]),'T_BOOL':([43,46,59,],[52,52,52,]),'ARROW':([51,52,55,66,67,68,69,70,71,72,80,],[-35,-36,59,76,78,-15,-17,-18,-19,-20,-16,]),'IS':([56,],[60,]),'UNDERSCORE':([60,64,65,75,82,83,],[67,67,-11,-12,-13,-14,]),'END':([64,65,75,82,83,],[74,-11,-12,-13,-14,]),'COMMA':([66,68,69,70,71,72,80,],[77,-15,-17,-18,-19,-20,-16,]),}
+_lr_action_items = {'LET':([0,1,2,16,17,18,19,],[6,6,-1,-2,-3,-4,-5,]),'FUN':([0,1,2,16,17,18,19,],[8,8,-1,-2,-3,-4,-5,]),'WHEN':([0,1,2,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,62,78,80,],[9,9,-1,9,9,9,-2,-3,-4,-5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,]),'IF':([0,1,2,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,62,78,80,],[12,12,-1,12,12,12,-2,-3,-4,-5,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,]),'LPAREN':([0,1,2,7,9,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,62,78,80,],[10,10,-1,28,30,10,10,10,-2,-3,-4,-5,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'INT':([0,1,2,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,61,62,65,66,71,77,78,79,80,85,86,],[13,13,-1,13,13,13,-2,-3,-4,-5,13,13,13,13,13,13,13,13,13,13,13,13,13,70,13,70,-11,81,-12,13,70,13,-13,-14,]),'TRUE':([0,1,2,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,61,62,65,66,77,78,79,80,85,86,],[14,14,-1,14,14,14,-2,-3,-4,-5,14,14,14,14,14,14,14,14,14,14,14,14,14,72,14,72,-11,-12,14,72,14,-13,-14,]),'FALSE':([0,1,2,10,11,12,16,17,18,19,20,21,22,23,24,25,26,28,30,43,48,49,59,61,62,65,66,77,78,79,80,85,86,],[15,15,-1,15,15,15,-2,-3,-4,-5,15,15,15,15,15,15,15,15,15,15,15,15,15,73,15,73,-11,-12,15,73,15,-13,-14,]),'ID':([0,1,2,6,8,10,11,12,16,17,18,19,20,21,22,23,24,25,26,27,28,30,43,48,49,59,61,62,65,66,77,78,79,80,85,86,],[7,7,-1,27,29,7,7,7,-2,-3,-4,-5,7,7,7,7,7,7,7,41,7,7,7,7,7,7,74,7,74,-11,-12,7,74,7,-13,-14,]),'SUBTRACTION':([0,1,2,5,7,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,30,31,32,33,34,35,36,37,38,39,40,43,44,46,47,48,49,53,54,57,58,59,61,62,63,65,66,75,76,77,78,79,80,82,84,85,86,],[11,11,-1,21,-35,11,11,11,-31,-32,-33,-2,-3,-4,-5,11,11,11,11,11,11,11,11,11,21,-38,21,-22,-23,-24,-25,21,21,21,11,21,21,-30,11,11,21,-34,21,21,11,71,11,21,71,-11,21,-10,-12,11,71,11,21,21,-13,-14,]),'$end':([1,2,16,17,18,19,],[0,-1,-2,-3,-4,-5,]),'SEMICOLON':([3,4,5,7,13,14,15,32,34,35,36,37,38,39,40,47,51,52,53,54,58,63,64,75,76,82,84,],[17,18,19,-35,-31,-32,-33,-38,-22,-23,-24,-25,-26,-27,-28,-30,-36,-37,-7,-34,-8,-6,-9,-29,-10,85,86,]),'SUM':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[20,-35,-31,-32,-33,20,-38,20,-22,-23,-24,-25,20,20,20,20,20,-30,20,-34,20,20,20,20,-10,20,20,]),'PRODUCT':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[22,-35,-31,-32,-33,22,-38,22,22,22,-24,-25,22,22,22,22,22,-30,22,-34,22,22,22,22,-10,22,22,]),'BAR':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[23,-35,-31,-32,-33,23,-38,23,23,23,-24,-25,23,23,23,23,23,-30,23,-34,23,23,23,23,-10,23,23,]),'EQUAL':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[24,-35,-31,-32,-33,24,-38,24,-22,-23,-24,-25,-26,-27,-28,24,24,-30,24,-34,24,24,24,24,-10,24,24,]),'LESS':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[25,-35,-31,-32,-33,25,-38,25,-22,-23,-24,-25,-26,-27,-28,25,25,-30,25,-34,25,25,25,25,-10,25,25,]),'GREATER':([5,7,13,14,15,31,32,33,34,35,36,37,38,39,40,44,46,47,53,54,57,58,63,75,76,82,84,],[26,-35,-31,-32,-33,26,-38,26,-22,-23,-24,-25,-26,-27,-28,26,26,-30,26,-34,26,26,26,26,-10,26,26,]),'RPAREN':([7,13,14,15,31,32,34,35,36,37,38,39,40,44,46,47,54,75,76,],[-35,-31,-32,-33,47,-38,-22,-23,-24,-25,-26,-27,-28,54,56,-30,-34,-29,-10,]),'THEN':([7,13,14,15,32,33,34,35,36,37,38,39,40,47,54,75,76,],[-35,-31,-32,-33,-38,48,-22,-23,-24,-25,-26,-27,-28,-30,-34,-29,-10,]),'ELSE':([7,13,14,15,32,34,35,36,37,38,39,40,47,54,57,75,76,],[-35,-31,-32,-33,-38,-22,-23,-24,-25,-26,-27,-28,-30,-34,62,-29,-10,]),'COLON':([27,29,],[42,45,]),'ASSIGN':([27,41,50,51,52,],[43,49,59,-36,-37,]),'T_INT':([42,45,60,],[51,51,51,]),'T_BOOL':([42,45,60,],[52,52,52,]),'ARROW':([51,52,55,67,68,69,70,72,73,74,81,83,],[-36,-37,60,78,80,-15,-17,-19,-20,-21,-18,-16,]),'IS':([56,],[61,]),'UNDERSCORE':([61,65,66,77,85,86,],[68,68,-11,-12,-13,-14,]),'END':([65,66,77,85,86,],[76,-11,-12,-13,-14,]),'COMMA':([67,69,70,72,73,74,81,83,],[79,-15,-17,-19,-20,-21,-18,-16,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programa':([0,],[1,]),'instrucao':([0,1,],[2,17,]),'let_statement':([0,1,],[3,3,]),'fun_statement':([0,1,],[4,4,]),'when_statement':([0,1,],[5,5,]),'expressao':([0,1,11,12,13,22,23,24,25,26,27,28,30,32,44,49,58,61,76,78,],[6,6,33,34,35,36,37,38,39,40,41,42,45,47,53,57,62,73,79,81,]),'tipo':([43,46,59,],[50,55,63,]),'cases':([60,],[64,]),'case':([60,64,],[65,75,]),'pattern_list':([60,64,],[66,66,]),'pattern':([60,64,77,],[68,68,80,]),}
+_lr_goto_items = {'programa':([0,],[1,]),'instrucao':([0,1,],[2,16,]),'let_statement':([0,1,],[3,3,]),'fun_statement':([0,1,],[4,4,]),'expressao':([0,1,10,11,12,20,21,22,23,24,25,26,28,30,43,48,49,59,62,78,80,],[5,5,31,32,33,34,35,36,37,38,39,40,44,46,53,57,58,63,75,82,84,]),'tipo':([42,45,60,],[50,55,64,]),'cases':([61,],[65,]),'case':([61,65,],[66,77,]),'pattern_list':([61,65,],[67,67,]),'pattern':([61,65,79,],[69,69,83,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,39 +29,40 @@ _lr_productions = [
   ("S' -> programa","S'",1,None,None,None),
   ('programa -> instrucao','programa',1,'p_programa','lfun_parser.py',11),
   ('programa -> programa instrucao','programa',2,'p_programa','lfun_parser.py',12),
-  ('instrucao -> let_statement SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',16),
-  ('instrucao -> fun_statement SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',17),
-  ('instrucao -> when_statement SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',18),
-  ('instrucao -> expressao SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',19),
-  ('let_statement -> LET ID COLON tipo ASSIGN expressao','let_statement',6,'p_let_statement','lfun_parser.py',24),
-  ('let_statement -> LET ID ASSIGN expressao','let_statement',4,'p_let_statement','lfun_parser.py',25),
-  ('fun_statement -> FUN ID COLON tipo ARROW tipo','fun_statement',6,'p_fun_statement','lfun_parser.py',30),
-  ('when_statement -> WHEN LPAREN expressao RPAREN IS cases END','when_statement',7,'p_when_statement','lfun_parser.py',35),
-  ('cases -> case','cases',1,'p_cases','lfun_parser.py',39),
-  ('cases -> cases case','cases',2,'p_cases','lfun_parser.py',40),
-  ('case -> pattern_list ARROW expressao SEMICOLON','case',4,'p_case','lfun_parser.py',44),
-  ('case -> UNDERSCORE ARROW expressao SEMICOLON','case',4,'p_case','lfun_parser.py',45),
-  ('pattern_list -> pattern','pattern_list',1,'p_pattern_list','lfun_parser.py',54),
-  ('pattern_list -> pattern_list COMMA pattern','pattern_list',3,'p_pattern_list','lfun_parser.py',55),
-  ('pattern -> INT','pattern',1,'p_pattern','lfun_parser.py',59),
-  ('pattern -> TRUE','pattern',1,'p_pattern','lfun_parser.py',60),
-  ('pattern -> FALSE','pattern',1,'p_pattern','lfun_parser.py',61),
-  ('pattern -> ID','pattern',1,'p_pattern','lfun_parser.py',62),
-  ('expressao -> expressao SUM expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',67),
-  ('expressao -> expressao SUBTRACTION expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',68),
-  ('expressao -> expressao PRODUCT expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',69),
-  ('expressao -> expressao BAR expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',70),
-  ('expressao -> expressao EQUAL expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',71),
-  ('expressao -> expressao LESS expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',72),
-  ('expressao -> expressao GREATER expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',73),
-  ('expressao -> IF expressao THEN expressao ELSE expressao','expressao',6,'p_expressao_if','lfun_parser.py',77),
-  ('expressao -> LPAREN expressao RPAREN','expressao',3,'p_expressao_parenteses','lfun_parser.py',81),
-  ('expressao -> INT','expressao',1,'p_expressao_inteiro','lfun_parser.py',85),
-  ('expressao -> TRUE','expressao',1,'p_expressao_bool','lfun_parser.py',89),
-  ('expressao -> FALSE','expressao',1,'p_expressao_bool','lfun_parser.py',90),
-  ('expressao -> ID LPAREN expressao RPAREN','expressao',4,'p_expressao_chamada','lfun_parser.py',94),
-  ('expressao -> ID','expressao',1,'p_expressao_id','lfun_parser.py',98),
-  ('tipo -> T_INT','tipo',1,'p_tipo','lfun_parser.py',102),
-  ('tipo -> T_BOOL','tipo',1,'p_tipo','lfun_parser.py',103),
-  ('expressao -> SUBTRACTION expressao','expressao',2,'p_expressao_unaria','lfun_parser.py',107),
+  ('instrucao -> let_statement SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',19),
+  ('instrucao -> fun_statement SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',20),
+  ('instrucao -> expressao SEMICOLON','instrucao',2,'p_instrucao','lfun_parser.py',21),
+  ('let_statement -> LET ID COLON tipo ASSIGN expressao','let_statement',6,'p_let_statement','lfun_parser.py',26),
+  ('let_statement -> LET ID ASSIGN expressao','let_statement',4,'p_let_statement','lfun_parser.py',27),
+  ('let_statement -> LET ID ID ASSIGN expressao','let_statement',5,'p_let_statement','lfun_parser.py',28),
+  ('fun_statement -> FUN ID COLON tipo ARROW tipo','fun_statement',6,'p_fun_statement','lfun_parser.py',38),
+  ('expressao -> WHEN LPAREN expressao RPAREN IS cases END','expressao',7,'p_expressao_when','lfun_parser.py',43),
+  ('cases -> case','cases',1,'p_cases','lfun_parser.py',47),
+  ('cases -> cases case','cases',2,'p_cases','lfun_parser.py',48),
+  ('case -> pattern_list ARROW expressao SEMICOLON','case',4,'p_case','lfun_parser.py',55),
+  ('case -> UNDERSCORE ARROW expressao SEMICOLON','case',4,'p_case','lfun_parser.py',56),
+  ('pattern_list -> pattern','pattern_list',1,'p_pattern_list','lfun_parser.py',65),
+  ('pattern_list -> pattern_list COMMA pattern','pattern_list',3,'p_pattern_list','lfun_parser.py',66),
+  ('pattern -> INT','pattern',1,'p_pattern','lfun_parser.py',73),
+  ('pattern -> SUBTRACTION INT','pattern',2,'p_pattern','lfun_parser.py',74),
+  ('pattern -> TRUE','pattern',1,'p_pattern','lfun_parser.py',75),
+  ('pattern -> FALSE','pattern',1,'p_pattern','lfun_parser.py',76),
+  ('pattern -> ID','pattern',1,'p_pattern','lfun_parser.py',77),
+  ('expressao -> expressao SUM expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',85),
+  ('expressao -> expressao SUBTRACTION expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',86),
+  ('expressao -> expressao PRODUCT expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',87),
+  ('expressao -> expressao BAR expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',88),
+  ('expressao -> expressao EQUAL expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',89),
+  ('expressao -> expressao LESS expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',90),
+  ('expressao -> expressao GREATER expressao','expressao',3,'p_expressao_binaria','lfun_parser.py',91),
+  ('expressao -> IF expressao THEN expressao ELSE expressao','expressao',6,'p_expressao_if','lfun_parser.py',95),
+  ('expressao -> LPAREN expressao RPAREN','expressao',3,'p_expressao_parenteses','lfun_parser.py',99),
+  ('expressao -> INT','expressao',1,'p_expressao_inteiro','lfun_parser.py',103),
+  ('expressao -> TRUE','expressao',1,'p_expressao_bool','lfun_parser.py',107),
+  ('expressao -> FALSE','expressao',1,'p_expressao_bool','lfun_parser.py',108),
+  ('expressao -> ID LPAREN expressao RPAREN','expressao',4,'p_expressao_chamada','lfun_parser.py',112),
+  ('expressao -> ID','expressao',1,'p_expressao_id','lfun_parser.py',116),
+  ('tipo -> T_INT','tipo',1,'p_tipo','lfun_parser.py',120),
+  ('tipo -> T_BOOL','tipo',1,'p_tipo','lfun_parser.py',121),
+  ('expressao -> SUBTRACTION expressao','expressao',2,'p_expressao_unaria','lfun_parser.py',125),
 ]
