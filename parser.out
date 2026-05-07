@@ -9,84 +9,83 @@ Rule 3     instrucao -> let_statement SEMICOLON
 Rule 4     instrucao -> fun_statement SEMICOLON
 Rule 5     instrucao -> expressao SEMICOLON
 Rule 6     let_statement -> LET ID COLON tipo ASSIGN expressao
-Rule 7     let_statement -> LET ID ASSIGN expressao
-Rule 8     let_statement -> LET ID ID ASSIGN expressao
-Rule 9     fun_statement -> FUN ID COLON tipo ARROW tipo
-Rule 10    expressao -> WHEN LPAREN expressao RPAREN IS cases END
-Rule 11    cases -> case
-Rule 12    cases -> cases case
-Rule 13    case -> pattern_list ARROW expressao SEMICOLON
-Rule 14    case -> UNDERSCORE ARROW expressao SEMICOLON
-Rule 15    pattern_list -> pattern
-Rule 16    pattern_list -> pattern_list COMMA pattern
-Rule 17    pattern -> INT
-Rule 18    pattern -> SUBTRACTION INT
-Rule 19    pattern -> TRUE
-Rule 20    pattern -> FALSE
-Rule 21    pattern -> ID
-Rule 22    expressao -> expressao SUM expressao
-Rule 23    expressao -> expressao SUBTRACTION expressao
-Rule 24    expressao -> expressao PRODUCT expressao
-Rule 25    expressao -> expressao BAR expressao
-Rule 26    expressao -> expressao EQUAL expressao
-Rule 27    expressao -> expressao LESS expressao
-Rule 28    expressao -> expressao GREATER expressao
-Rule 29    expressao -> IF expressao THEN expressao ELSE expressao
-Rule 30    expressao -> LPAREN expressao RPAREN
-Rule 31    expressao -> INT
-Rule 32    expressao -> TRUE
-Rule 33    expressao -> FALSE
-Rule 34    expressao -> ID LPAREN expressao RPAREN
-Rule 35    expressao -> ID
-Rule 36    tipo -> T_INT
-Rule 37    tipo -> T_BOOL
-Rule 38    expressao -> SUBTRACTION expressao
+Rule 7     let_statement -> LET ID ID ASSIGN expressao
+Rule 8     fun_statement -> FUN ID COLON tipo ARROW tipo
+Rule 9     expressao -> WHEN LPAREN expressao RPAREN IS cases END
+Rule 10    cases -> case
+Rule 11    cases -> cases case
+Rule 12    case -> pattern_list ARROW expressao SEMICOLON
+Rule 13    case -> UNDERSCORE ARROW expressao SEMICOLON
+Rule 14    pattern_list -> pattern
+Rule 15    pattern_list -> pattern_list COMMA pattern
+Rule 16    pattern -> INT
+Rule 17    pattern -> SUBTRACTION INT
+Rule 18    pattern -> TRUE
+Rule 19    pattern -> FALSE
+Rule 20    pattern -> ID
+Rule 21    expressao -> expressao SUM expressao
+Rule 22    expressao -> expressao SUBTRACTION expressao
+Rule 23    expressao -> expressao PRODUCT expressao
+Rule 24    expressao -> expressao BAR expressao
+Rule 25    expressao -> expressao EQUAL expressao
+Rule 26    expressao -> expressao LESS expressao
+Rule 27    expressao -> expressao GREATER expressao
+Rule 28    expressao -> IF expressao THEN expressao ELSE expressao
+Rule 29    expressao -> LPAREN expressao RPAREN
+Rule 30    expressao -> INT
+Rule 31    expressao -> TRUE
+Rule 32    expressao -> FALSE
+Rule 33    expressao -> ID LPAREN expressao RPAREN
+Rule 34    expressao -> ID
+Rule 35    tipo -> T_INT
+Rule 36    tipo -> T_BOOL
+Rule 37    expressao -> SUBTRACTION expressao
 
 Terminals, with rules where they appear
 
-ARROW                : 9 13 14
-ASSIGN               : 6 7 8
-BAR                  : 25
-COLON                : 6 9
-COMMA                : 16
-ELSE                 : 29
-END                  : 10
-EQUAL                : 26
-FALSE                : 20 33
-FUN                  : 9
-GREATER              : 28
-ID                   : 6 7 8 8 9 21 34 35
-IF                   : 29
-INT                  : 17 18 31
-IS                   : 10
-LESS                 : 27
-LET                  : 6 7 8
-LPAREN               : 10 30 34
-PRODUCT              : 24
-RPAREN               : 10 30 34
-SEMICOLON            : 3 4 5 13 14
-SUBTRACTION          : 18 23 38
-SUM                  : 22
-THEN                 : 29
-TRUE                 : 19 32
-T_BOOL               : 37
-T_INT                : 36
-UNDERSCORE           : 14
-WHEN                 : 10
+ARROW                : 8 12 13
+ASSIGN               : 6 7
+BAR                  : 24
+COLON                : 6 8
+COMMA                : 15
+ELSE                 : 28
+END                  : 9
+EQUAL                : 25
+FALSE                : 19 32
+FUN                  : 8
+GREATER              : 27
+ID                   : 6 7 7 8 20 33 34
+IF                   : 28
+INT                  : 16 17 30
+IS                   : 9
+LESS                 : 26
+LET                  : 6 7
+LPAREN               : 9 29 33
+PRODUCT              : 23
+RPAREN               : 9 29 33
+SEMICOLON            : 3 4 5 12 13
+SUBTRACTION          : 17 22 37
+SUM                  : 21
+THEN                 : 28
+TRUE                 : 18 31
+T_BOOL               : 36
+T_INT                : 35
+UNDERSCORE           : 13
+WHEN                 : 9
 error                : 
 
 Nonterminals, with rules where they appear
 
-case                 : 11 12
-cases                : 10 12
-expressao            : 5 6 7 8 10 13 14 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 29 30 34 38
+case                 : 10 11
+cases                : 9 11
+expressao            : 5 6 7 9 12 13 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 28 29 33 37
 fun_statement        : 4
 instrucao            : 1 2
 let_statement        : 3
-pattern              : 15 16
-pattern_list         : 13 16
+pattern              : 14 15
+pattern_list         : 12 15
 programa             : 2 0
-tipo                 : 6 9 9
+tipo                 : 6 8 8
 
 Parsing method: LALR
 
@@ -99,25 +98,24 @@ state 0
     (4) instrucao -> . fun_statement SEMICOLON
     (5) instrucao -> . expressao SEMICOLON
     (6) let_statement -> . LET ID COLON tipo ASSIGN expressao
-    (7) let_statement -> . LET ID ASSIGN expressao
-    (8) let_statement -> . LET ID ID ASSIGN expressao
-    (9) fun_statement -> . FUN ID COLON tipo ARROW tipo
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (7) let_statement -> . LET ID ID ASSIGN expressao
+    (8) fun_statement -> . FUN ID COLON tipo ARROW tipo
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     LET             shift and go to state 6
     FUN             shift and go to state 8
@@ -144,25 +142,24 @@ state 1
     (4) instrucao -> . fun_statement SEMICOLON
     (5) instrucao -> . expressao SEMICOLON
     (6) let_statement -> . LET ID COLON tipo ASSIGN expressao
-    (7) let_statement -> . LET ID ASSIGN expressao
-    (8) let_statement -> . LET ID ID ASSIGN expressao
-    (9) fun_statement -> . FUN ID COLON tipo ARROW tipo
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (7) let_statement -> . LET ID ID ASSIGN expressao
+    (8) fun_statement -> . FUN ID COLON tipo ARROW tipo
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     LET             shift and go to state 6
     FUN             shift and go to state 8
@@ -214,13 +211,13 @@ state 4
 state 5
 
     (5) instrucao -> expressao . SEMICOLON
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
     SEMICOLON       shift and go to state 19
     SUM             shift and go to state 20
@@ -235,64 +232,63 @@ state 5
 state 6
 
     (6) let_statement -> LET . ID COLON tipo ASSIGN expressao
-    (7) let_statement -> LET . ID ASSIGN expressao
-    (8) let_statement -> LET . ID ID ASSIGN expressao
+    (7) let_statement -> LET . ID ID ASSIGN expressao
 
     ID              shift and go to state 27
 
 
 state 7
 
-    (34) expressao -> ID . LPAREN expressao RPAREN
-    (35) expressao -> ID .
+    (33) expressao -> ID . LPAREN expressao RPAREN
+    (34) expressao -> ID .
 
     LPAREN          shift and go to state 28
-    SEMICOLON       reduce using rule 35 (expressao -> ID .)
-    SUM             reduce using rule 35 (expressao -> ID .)
-    SUBTRACTION     reduce using rule 35 (expressao -> ID .)
-    PRODUCT         reduce using rule 35 (expressao -> ID .)
-    BAR             reduce using rule 35 (expressao -> ID .)
-    EQUAL           reduce using rule 35 (expressao -> ID .)
-    LESS            reduce using rule 35 (expressao -> ID .)
-    GREATER         reduce using rule 35 (expressao -> ID .)
-    RPAREN          reduce using rule 35 (expressao -> ID .)
-    THEN            reduce using rule 35 (expressao -> ID .)
-    ELSE            reduce using rule 35 (expressao -> ID .)
+    SEMICOLON       reduce using rule 34 (expressao -> ID .)
+    SUM             reduce using rule 34 (expressao -> ID .)
+    SUBTRACTION     reduce using rule 34 (expressao -> ID .)
+    PRODUCT         reduce using rule 34 (expressao -> ID .)
+    BAR             reduce using rule 34 (expressao -> ID .)
+    EQUAL           reduce using rule 34 (expressao -> ID .)
+    LESS            reduce using rule 34 (expressao -> ID .)
+    GREATER         reduce using rule 34 (expressao -> ID .)
+    RPAREN          reduce using rule 34 (expressao -> ID .)
+    THEN            reduce using rule 34 (expressao -> ID .)
+    ELSE            reduce using rule 34 (expressao -> ID .)
 
 
 state 8
 
-    (9) fun_statement -> FUN . ID COLON tipo ARROW tipo
+    (8) fun_statement -> FUN . ID COLON tipo ARROW tipo
 
     ID              shift and go to state 29
 
 
 state 9
 
-    (10) expressao -> WHEN . LPAREN expressao RPAREN IS cases END
+    (9) expressao -> WHEN . LPAREN expressao RPAREN IS cases END
 
     LPAREN          shift and go to state 30
 
 
 state 10
 
-    (30) expressao -> LPAREN . expressao RPAREN
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (29) expressao -> LPAREN . expressao RPAREN
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -307,23 +303,23 @@ state 10
 
 state 11
 
-    (38) expressao -> SUBTRACTION . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (37) expressao -> SUBTRACTION . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -338,23 +334,23 @@ state 11
 
 state 12
 
-    (29) expressao -> IF . expressao THEN expressao ELSE expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (28) expressao -> IF . expressao THEN expressao ELSE expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -369,53 +365,53 @@ state 12
 
 state 13
 
-    (31) expressao -> INT .
+    (30) expressao -> INT .
 
-    SEMICOLON       reduce using rule 31 (expressao -> INT .)
-    SUM             reduce using rule 31 (expressao -> INT .)
-    SUBTRACTION     reduce using rule 31 (expressao -> INT .)
-    PRODUCT         reduce using rule 31 (expressao -> INT .)
-    BAR             reduce using rule 31 (expressao -> INT .)
-    EQUAL           reduce using rule 31 (expressao -> INT .)
-    LESS            reduce using rule 31 (expressao -> INT .)
-    GREATER         reduce using rule 31 (expressao -> INT .)
-    RPAREN          reduce using rule 31 (expressao -> INT .)
-    THEN            reduce using rule 31 (expressao -> INT .)
-    ELSE            reduce using rule 31 (expressao -> INT .)
+    SEMICOLON       reduce using rule 30 (expressao -> INT .)
+    SUM             reduce using rule 30 (expressao -> INT .)
+    SUBTRACTION     reduce using rule 30 (expressao -> INT .)
+    PRODUCT         reduce using rule 30 (expressao -> INT .)
+    BAR             reduce using rule 30 (expressao -> INT .)
+    EQUAL           reduce using rule 30 (expressao -> INT .)
+    LESS            reduce using rule 30 (expressao -> INT .)
+    GREATER         reduce using rule 30 (expressao -> INT .)
+    RPAREN          reduce using rule 30 (expressao -> INT .)
+    THEN            reduce using rule 30 (expressao -> INT .)
+    ELSE            reduce using rule 30 (expressao -> INT .)
 
 
 state 14
 
-    (32) expressao -> TRUE .
+    (31) expressao -> TRUE .
 
-    SEMICOLON       reduce using rule 32 (expressao -> TRUE .)
-    SUM             reduce using rule 32 (expressao -> TRUE .)
-    SUBTRACTION     reduce using rule 32 (expressao -> TRUE .)
-    PRODUCT         reduce using rule 32 (expressao -> TRUE .)
-    BAR             reduce using rule 32 (expressao -> TRUE .)
-    EQUAL           reduce using rule 32 (expressao -> TRUE .)
-    LESS            reduce using rule 32 (expressao -> TRUE .)
-    GREATER         reduce using rule 32 (expressao -> TRUE .)
-    RPAREN          reduce using rule 32 (expressao -> TRUE .)
-    THEN            reduce using rule 32 (expressao -> TRUE .)
-    ELSE            reduce using rule 32 (expressao -> TRUE .)
+    SEMICOLON       reduce using rule 31 (expressao -> TRUE .)
+    SUM             reduce using rule 31 (expressao -> TRUE .)
+    SUBTRACTION     reduce using rule 31 (expressao -> TRUE .)
+    PRODUCT         reduce using rule 31 (expressao -> TRUE .)
+    BAR             reduce using rule 31 (expressao -> TRUE .)
+    EQUAL           reduce using rule 31 (expressao -> TRUE .)
+    LESS            reduce using rule 31 (expressao -> TRUE .)
+    GREATER         reduce using rule 31 (expressao -> TRUE .)
+    RPAREN          reduce using rule 31 (expressao -> TRUE .)
+    THEN            reduce using rule 31 (expressao -> TRUE .)
+    ELSE            reduce using rule 31 (expressao -> TRUE .)
 
 
 state 15
 
-    (33) expressao -> FALSE .
+    (32) expressao -> FALSE .
 
-    SEMICOLON       reduce using rule 33 (expressao -> FALSE .)
-    SUM             reduce using rule 33 (expressao -> FALSE .)
-    SUBTRACTION     reduce using rule 33 (expressao -> FALSE .)
-    PRODUCT         reduce using rule 33 (expressao -> FALSE .)
-    BAR             reduce using rule 33 (expressao -> FALSE .)
-    EQUAL           reduce using rule 33 (expressao -> FALSE .)
-    LESS            reduce using rule 33 (expressao -> FALSE .)
-    GREATER         reduce using rule 33 (expressao -> FALSE .)
-    RPAREN          reduce using rule 33 (expressao -> FALSE .)
-    THEN            reduce using rule 33 (expressao -> FALSE .)
-    ELSE            reduce using rule 33 (expressao -> FALSE .)
+    SEMICOLON       reduce using rule 32 (expressao -> FALSE .)
+    SUM             reduce using rule 32 (expressao -> FALSE .)
+    SUBTRACTION     reduce using rule 32 (expressao -> FALSE .)
+    PRODUCT         reduce using rule 32 (expressao -> FALSE .)
+    BAR             reduce using rule 32 (expressao -> FALSE .)
+    EQUAL           reduce using rule 32 (expressao -> FALSE .)
+    LESS            reduce using rule 32 (expressao -> FALSE .)
+    GREATER         reduce using rule 32 (expressao -> FALSE .)
+    RPAREN          reduce using rule 32 (expressao -> FALSE .)
+    THEN            reduce using rule 32 (expressao -> FALSE .)
+    ELSE            reduce using rule 32 (expressao -> FALSE .)
 
 
 state 16
@@ -488,23 +484,23 @@ state 19
 
 state 20
 
-    (22) expressao -> expressao SUM . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (21) expressao -> expressao SUM . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -519,23 +515,23 @@ state 20
 
 state 21
 
-    (23) expressao -> expressao SUBTRACTION . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (22) expressao -> expressao SUBTRACTION . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -550,23 +546,23 @@ state 21
 
 state 22
 
-    (24) expressao -> expressao PRODUCT . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (23) expressao -> expressao PRODUCT . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -581,23 +577,23 @@ state 22
 
 state 23
 
-    (25) expressao -> expressao BAR . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (24) expressao -> expressao BAR . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -612,23 +608,23 @@ state 23
 
 state 24
 
-    (26) expressao -> expressao EQUAL . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (25) expressao -> expressao EQUAL . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -643,23 +639,23 @@ state 24
 
 state 25
 
-    (27) expressao -> expressao LESS . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (26) expressao -> expressao LESS . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -674,23 +670,23 @@ state 25
 
 state 26
 
-    (28) expressao -> expressao GREATER . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (27) expressao -> expressao GREATER . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -706,33 +702,31 @@ state 26
 state 27
 
     (6) let_statement -> LET ID . COLON tipo ASSIGN expressao
-    (7) let_statement -> LET ID . ASSIGN expressao
-    (8) let_statement -> LET ID . ID ASSIGN expressao
+    (7) let_statement -> LET ID . ID ASSIGN expressao
 
     COLON           shift and go to state 42
-    ASSIGN          shift and go to state 43
     ID              shift and go to state 41
 
 
 state 28
 
-    (34) expressao -> ID LPAREN . expressao RPAREN
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (33) expressao -> ID LPAREN . expressao RPAREN
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -743,34 +737,34 @@ state 28
     ID              shift and go to state 7
     SUBTRACTION     shift and go to state 11
 
-    expressao                      shift and go to state 44
+    expressao                      shift and go to state 43
 
 state 29
 
-    (9) fun_statement -> FUN ID . COLON tipo ARROW tipo
+    (8) fun_statement -> FUN ID . COLON tipo ARROW tipo
 
-    COLON           shift and go to state 45
+    COLON           shift and go to state 44
 
 
 state 30
 
-    (10) expressao -> WHEN LPAREN . expressao RPAREN IS cases END
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (9) expressao -> WHEN LPAREN . expressao RPAREN IS cases END
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -781,20 +775,20 @@ state 30
     ID              shift and go to state 7
     SUBTRACTION     shift and go to state 11
 
-    expressao                      shift and go to state 46
+    expressao                      shift and go to state 45
 
 state 31
 
-    (30) expressao -> LPAREN expressao . RPAREN
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (29) expressao -> LPAREN expressao . RPAREN
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    RPAREN          shift and go to state 47
+    RPAREN          shift and go to state 46
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
@@ -806,26 +800,26 @@ state 31
 
 state 32
 
-    (38) expressao -> SUBTRACTION expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (37) expressao -> SUBTRACTION expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    SUM             reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    SUBTRACTION     reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    PRODUCT         reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    BAR             reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    EQUAL           reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    LESS            reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    GREATER         reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    RPAREN          reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    THEN            reduce using rule 38 (expressao -> SUBTRACTION expressao .)
-    ELSE            reduce using rule 38 (expressao -> SUBTRACTION expressao .)
+    SEMICOLON       reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    SUM             reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    SUBTRACTION     reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    PRODUCT         reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    BAR             reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    EQUAL           reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    LESS            reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    GREATER         reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    RPAREN          reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    THEN            reduce using rule 37 (expressao -> SUBTRACTION expressao .)
+    ELSE            reduce using rule 37 (expressao -> SUBTRACTION expressao .)
 
   ! SUM             [ shift and go to state 20 ]
   ! SUBTRACTION     [ shift and go to state 21 ]
@@ -838,16 +832,16 @@ state 32
 
 state 33
 
-    (29) expressao -> IF expressao . THEN expressao ELSE expressao
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (28) expressao -> IF expressao . THEN expressao ELSE expressao
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    THEN            shift and go to state 48
+    THEN            shift and go to state 47
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
@@ -859,29 +853,29 @@ state 33
 
 state 34
 
-    (22) expressao -> expressao SUM expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (21) expressao -> expressao SUM expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 22 (expressao -> expressao SUM expressao .)
-    SUM             reduce using rule 22 (expressao -> expressao SUM expressao .)
-    SUBTRACTION     reduce using rule 22 (expressao -> expressao SUM expressao .)
-    EQUAL           reduce using rule 22 (expressao -> expressao SUM expressao .)
-    LESS            reduce using rule 22 (expressao -> expressao SUM expressao .)
-    GREATER         reduce using rule 22 (expressao -> expressao SUM expressao .)
-    RPAREN          reduce using rule 22 (expressao -> expressao SUM expressao .)
-    THEN            reduce using rule 22 (expressao -> expressao SUM expressao .)
-    ELSE            reduce using rule 22 (expressao -> expressao SUM expressao .)
+    SEMICOLON       reduce using rule 21 (expressao -> expressao SUM expressao .)
+    SUM             reduce using rule 21 (expressao -> expressao SUM expressao .)
+    SUBTRACTION     reduce using rule 21 (expressao -> expressao SUM expressao .)
+    EQUAL           reduce using rule 21 (expressao -> expressao SUM expressao .)
+    LESS            reduce using rule 21 (expressao -> expressao SUM expressao .)
+    GREATER         reduce using rule 21 (expressao -> expressao SUM expressao .)
+    RPAREN          reduce using rule 21 (expressao -> expressao SUM expressao .)
+    THEN            reduce using rule 21 (expressao -> expressao SUM expressao .)
+    ELSE            reduce using rule 21 (expressao -> expressao SUM expressao .)
     PRODUCT         shift and go to state 22
     BAR             shift and go to state 23
 
-  ! PRODUCT         [ reduce using rule 22 (expressao -> expressao SUM expressao .) ]
-  ! BAR             [ reduce using rule 22 (expressao -> expressao SUM expressao .) ]
+  ! PRODUCT         [ reduce using rule 21 (expressao -> expressao SUM expressao .) ]
+  ! BAR             [ reduce using rule 21 (expressao -> expressao SUM expressao .) ]
   ! SUM             [ shift and go to state 20 ]
   ! SUBTRACTION     [ shift and go to state 21 ]
   ! EQUAL           [ shift and go to state 24 ]
@@ -891,29 +885,29 @@ state 34
 
 state 35
 
-    (23) expressao -> expressao SUBTRACTION expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (22) expressao -> expressao SUBTRACTION expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    SUM             reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    SUBTRACTION     reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    EQUAL           reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    LESS            reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    GREATER         reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    RPAREN          reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    THEN            reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
-    ELSE            reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .)
+    SEMICOLON       reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    SUM             reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    SUBTRACTION     reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    EQUAL           reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    LESS            reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    GREATER         reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    RPAREN          reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    THEN            reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
+    ELSE            reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .)
     PRODUCT         shift and go to state 22
     BAR             shift and go to state 23
 
-  ! PRODUCT         [ reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .) ]
-  ! BAR             [ reduce using rule 23 (expressao -> expressao SUBTRACTION expressao .) ]
+  ! PRODUCT         [ reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .) ]
+  ! BAR             [ reduce using rule 22 (expressao -> expressao SUBTRACTION expressao .) ]
   ! SUM             [ shift and go to state 20 ]
   ! SUBTRACTION     [ shift and go to state 21 ]
   ! EQUAL           [ shift and go to state 24 ]
@@ -923,26 +917,26 @@ state 35
 
 state 36
 
-    (24) expressao -> expressao PRODUCT expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (23) expressao -> expressao PRODUCT expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    SUM             reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    SUBTRACTION     reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    PRODUCT         reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    BAR             reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    EQUAL           reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    LESS            reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    GREATER         reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    RPAREN          reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    THEN            reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
-    ELSE            reduce using rule 24 (expressao -> expressao PRODUCT expressao .)
+    SEMICOLON       reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    SUM             reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    SUBTRACTION     reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    PRODUCT         reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    BAR             reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    EQUAL           reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    LESS            reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    GREATER         reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    RPAREN          reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    THEN            reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
+    ELSE            reduce using rule 23 (expressao -> expressao PRODUCT expressao .)
 
   ! SUM             [ shift and go to state 20 ]
   ! SUBTRACTION     [ shift and go to state 21 ]
@@ -955,26 +949,26 @@ state 36
 
 state 37
 
-    (25) expressao -> expressao BAR expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (24) expressao -> expressao BAR expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 25 (expressao -> expressao BAR expressao .)
-    SUM             reduce using rule 25 (expressao -> expressao BAR expressao .)
-    SUBTRACTION     reduce using rule 25 (expressao -> expressao BAR expressao .)
-    PRODUCT         reduce using rule 25 (expressao -> expressao BAR expressao .)
-    BAR             reduce using rule 25 (expressao -> expressao BAR expressao .)
-    EQUAL           reduce using rule 25 (expressao -> expressao BAR expressao .)
-    LESS            reduce using rule 25 (expressao -> expressao BAR expressao .)
-    GREATER         reduce using rule 25 (expressao -> expressao BAR expressao .)
-    RPAREN          reduce using rule 25 (expressao -> expressao BAR expressao .)
-    THEN            reduce using rule 25 (expressao -> expressao BAR expressao .)
-    ELSE            reduce using rule 25 (expressao -> expressao BAR expressao .)
+    SEMICOLON       reduce using rule 24 (expressao -> expressao BAR expressao .)
+    SUM             reduce using rule 24 (expressao -> expressao BAR expressao .)
+    SUBTRACTION     reduce using rule 24 (expressao -> expressao BAR expressao .)
+    PRODUCT         reduce using rule 24 (expressao -> expressao BAR expressao .)
+    BAR             reduce using rule 24 (expressao -> expressao BAR expressao .)
+    EQUAL           reduce using rule 24 (expressao -> expressao BAR expressao .)
+    LESS            reduce using rule 24 (expressao -> expressao BAR expressao .)
+    GREATER         reduce using rule 24 (expressao -> expressao BAR expressao .)
+    RPAREN          reduce using rule 24 (expressao -> expressao BAR expressao .)
+    THEN            reduce using rule 24 (expressao -> expressao BAR expressao .)
+    ELSE            reduce using rule 24 (expressao -> expressao BAR expressao .)
 
   ! SUM             [ shift and go to state 20 ]
   ! SUBTRACTION     [ shift and go to state 21 ]
@@ -987,31 +981,31 @@ state 37
 
 state 38
 
-    (26) expressao -> expressao EQUAL expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (25) expressao -> expressao EQUAL expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    EQUAL           reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    LESS            reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    GREATER         reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    RPAREN          reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    THEN            reduce using rule 26 (expressao -> expressao EQUAL expressao .)
-    ELSE            reduce using rule 26 (expressao -> expressao EQUAL expressao .)
+    SEMICOLON       reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    EQUAL           reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    LESS            reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    GREATER         reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    RPAREN          reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    THEN            reduce using rule 25 (expressao -> expressao EQUAL expressao .)
+    ELSE            reduce using rule 25 (expressao -> expressao EQUAL expressao .)
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
     BAR             shift and go to state 23
 
-  ! SUM             [ reduce using rule 26 (expressao -> expressao EQUAL expressao .) ]
-  ! SUBTRACTION     [ reduce using rule 26 (expressao -> expressao EQUAL expressao .) ]
-  ! PRODUCT         [ reduce using rule 26 (expressao -> expressao EQUAL expressao .) ]
-  ! BAR             [ reduce using rule 26 (expressao -> expressao EQUAL expressao .) ]
+  ! SUM             [ reduce using rule 25 (expressao -> expressao EQUAL expressao .) ]
+  ! SUBTRACTION     [ reduce using rule 25 (expressao -> expressao EQUAL expressao .) ]
+  ! PRODUCT         [ reduce using rule 25 (expressao -> expressao EQUAL expressao .) ]
+  ! BAR             [ reduce using rule 25 (expressao -> expressao EQUAL expressao .) ]
   ! EQUAL           [ shift and go to state 24 ]
   ! LESS            [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1019,31 +1013,31 @@ state 38
 
 state 39
 
-    (27) expressao -> expressao LESS expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (26) expressao -> expressao LESS expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 27 (expressao -> expressao LESS expressao .)
-    EQUAL           reduce using rule 27 (expressao -> expressao LESS expressao .)
-    LESS            reduce using rule 27 (expressao -> expressao LESS expressao .)
-    GREATER         reduce using rule 27 (expressao -> expressao LESS expressao .)
-    RPAREN          reduce using rule 27 (expressao -> expressao LESS expressao .)
-    THEN            reduce using rule 27 (expressao -> expressao LESS expressao .)
-    ELSE            reduce using rule 27 (expressao -> expressao LESS expressao .)
+    SEMICOLON       reduce using rule 26 (expressao -> expressao LESS expressao .)
+    EQUAL           reduce using rule 26 (expressao -> expressao LESS expressao .)
+    LESS            reduce using rule 26 (expressao -> expressao LESS expressao .)
+    GREATER         reduce using rule 26 (expressao -> expressao LESS expressao .)
+    RPAREN          reduce using rule 26 (expressao -> expressao LESS expressao .)
+    THEN            reduce using rule 26 (expressao -> expressao LESS expressao .)
+    ELSE            reduce using rule 26 (expressao -> expressao LESS expressao .)
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
     BAR             shift and go to state 23
 
-  ! SUM             [ reduce using rule 27 (expressao -> expressao LESS expressao .) ]
-  ! SUBTRACTION     [ reduce using rule 27 (expressao -> expressao LESS expressao .) ]
-  ! PRODUCT         [ reduce using rule 27 (expressao -> expressao LESS expressao .) ]
-  ! BAR             [ reduce using rule 27 (expressao -> expressao LESS expressao .) ]
+  ! SUM             [ reduce using rule 26 (expressao -> expressao LESS expressao .) ]
+  ! SUBTRACTION     [ reduce using rule 26 (expressao -> expressao LESS expressao .) ]
+  ! PRODUCT         [ reduce using rule 26 (expressao -> expressao LESS expressao .) ]
+  ! BAR             [ reduce using rule 26 (expressao -> expressao LESS expressao .) ]
   ! EQUAL           [ shift and go to state 24 ]
   ! LESS            [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1051,31 +1045,31 @@ state 39
 
 state 40
 
-    (28) expressao -> expressao GREATER expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (27) expressao -> expressao GREATER expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    EQUAL           reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    LESS            reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    GREATER         reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    RPAREN          reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    THEN            reduce using rule 28 (expressao -> expressao GREATER expressao .)
-    ELSE            reduce using rule 28 (expressao -> expressao GREATER expressao .)
+    SEMICOLON       reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    EQUAL           reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    LESS            reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    GREATER         reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    RPAREN          reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    THEN            reduce using rule 27 (expressao -> expressao GREATER expressao .)
+    ELSE            reduce using rule 27 (expressao -> expressao GREATER expressao .)
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
     BAR             shift and go to state 23
 
-  ! SUM             [ reduce using rule 28 (expressao -> expressao GREATER expressao .) ]
-  ! SUBTRACTION     [ reduce using rule 28 (expressao -> expressao GREATER expressao .) ]
-  ! PRODUCT         [ reduce using rule 28 (expressao -> expressao GREATER expressao .) ]
-  ! BAR             [ reduce using rule 28 (expressao -> expressao GREATER expressao .) ]
+  ! SUM             [ reduce using rule 27 (expressao -> expressao GREATER expressao .) ]
+  ! SUBTRACTION     [ reduce using rule 27 (expressao -> expressao GREATER expressao .) ]
+  ! PRODUCT         [ reduce using rule 27 (expressao -> expressao GREATER expressao .) ]
+  ! BAR             [ reduce using rule 27 (expressao -> expressao GREATER expressao .) ]
   ! EQUAL           [ shift and go to state 24 ]
   ! LESS            [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1083,63 +1077,64 @@ state 40
 
 state 41
 
-    (8) let_statement -> LET ID ID . ASSIGN expressao
+    (7) let_statement -> LET ID ID . ASSIGN expressao
 
-    ASSIGN          shift and go to state 49
+    ASSIGN          shift and go to state 48
 
 
 state 42
 
     (6) let_statement -> LET ID COLON . tipo ASSIGN expressao
-    (36) tipo -> . T_INT
-    (37) tipo -> . T_BOOL
+    (35) tipo -> . T_INT
+    (36) tipo -> . T_BOOL
 
-    T_INT           shift and go to state 51
-    T_BOOL          shift and go to state 52
+    T_INT           shift and go to state 50
+    T_BOOL          shift and go to state 51
 
-    tipo                           shift and go to state 50
+    tipo                           shift and go to state 49
 
 state 43
 
-    (7) let_statement -> LET ID ASSIGN . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (33) expressao -> ID LPAREN expressao . RPAREN
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    WHEN            shift and go to state 9
-    IF              shift and go to state 12
-    LPAREN          shift and go to state 10
-    INT             shift and go to state 13
-    TRUE            shift and go to state 14
-    FALSE           shift and go to state 15
-    ID              shift and go to state 7
-    SUBTRACTION     shift and go to state 11
+    RPAREN          shift and go to state 52
+    SUM             shift and go to state 20
+    SUBTRACTION     shift and go to state 21
+    PRODUCT         shift and go to state 22
+    BAR             shift and go to state 23
+    EQUAL           shift and go to state 24
+    LESS            shift and go to state 25
+    GREATER         shift and go to state 26
 
-    expressao                      shift and go to state 53
 
 state 44
 
-    (34) expressao -> ID LPAREN expressao . RPAREN
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (8) fun_statement -> FUN ID COLON . tipo ARROW tipo
+    (35) tipo -> . T_INT
+    (36) tipo -> . T_BOOL
+
+    T_INT           shift and go to state 50
+    T_BOOL          shift and go to state 51
+
+    tipo                           shift and go to state 53
+
+state 45
+
+    (9) expressao -> WHEN LPAREN expressao . RPAREN IS cases END
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
     RPAREN          shift and go to state 54
     SUM             shift and go to state 20
@@ -1151,74 +1146,73 @@ state 44
     GREATER         shift and go to state 26
 
 
-state 45
-
-    (9) fun_statement -> FUN ID COLON . tipo ARROW tipo
-    (36) tipo -> . T_INT
-    (37) tipo -> . T_BOOL
-
-    T_INT           shift and go to state 51
-    T_BOOL          shift and go to state 52
-
-    tipo                           shift and go to state 55
-
 state 46
 
-    (10) expressao -> WHEN LPAREN expressao . RPAREN IS cases END
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (29) expressao -> LPAREN expressao RPAREN .
 
-    RPAREN          shift and go to state 56
-    SUM             shift and go to state 20
-    SUBTRACTION     shift and go to state 21
-    PRODUCT         shift and go to state 22
-    BAR             shift and go to state 23
-    EQUAL           shift and go to state 24
-    LESS            shift and go to state 25
-    GREATER         shift and go to state 26
+    SEMICOLON       reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    SUM             reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    SUBTRACTION     reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    PRODUCT         reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    BAR             reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    EQUAL           reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    LESS            reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    GREATER         reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    RPAREN          reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    THEN            reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
+    ELSE            reduce using rule 29 (expressao -> LPAREN expressao RPAREN .)
 
 
 state 47
 
-    (30) expressao -> LPAREN expressao RPAREN .
+    (28) expressao -> IF expressao THEN . expressao ELSE expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
-    SEMICOLON       reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    SUM             reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    SUBTRACTION     reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    PRODUCT         reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    BAR             reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    EQUAL           reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    LESS            reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    GREATER         reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    RPAREN          reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    THEN            reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
-    ELSE            reduce using rule 30 (expressao -> LPAREN expressao RPAREN .)
+    WHEN            shift and go to state 9
+    IF              shift and go to state 12
+    LPAREN          shift and go to state 10
+    INT             shift and go to state 13
+    TRUE            shift and go to state 14
+    FALSE           shift and go to state 15
+    ID              shift and go to state 7
+    SUBTRACTION     shift and go to state 11
 
+    expressao                      shift and go to state 55
 
 state 48
 
-    (29) expressao -> IF expressao THEN . expressao ELSE expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (7) let_statement -> LET ID ID ASSIGN . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -1229,246 +1223,194 @@ state 48
     ID              shift and go to state 7
     SUBTRACTION     shift and go to state 11
 
-    expressao                      shift and go to state 57
+    expressao                      shift and go to state 56
 
 state 49
 
-    (8) let_statement -> LET ID ID ASSIGN . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (6) let_statement -> LET ID COLON tipo . ASSIGN expressao
 
-    WHEN            shift and go to state 9
-    IF              shift and go to state 12
-    LPAREN          shift and go to state 10
-    INT             shift and go to state 13
-    TRUE            shift and go to state 14
-    FALSE           shift and go to state 15
-    ID              shift and go to state 7
-    SUBTRACTION     shift and go to state 11
+    ASSIGN          shift and go to state 57
 
-    expressao                      shift and go to state 58
 
 state 50
 
-    (6) let_statement -> LET ID COLON tipo . ASSIGN expressao
+    (35) tipo -> T_INT .
 
-    ASSIGN          shift and go to state 59
+    ASSIGN          reduce using rule 35 (tipo -> T_INT .)
+    ARROW           reduce using rule 35 (tipo -> T_INT .)
+    SEMICOLON       reduce using rule 35 (tipo -> T_INT .)
 
 
 state 51
 
-    (36) tipo -> T_INT .
+    (36) tipo -> T_BOOL .
 
-    ASSIGN          reduce using rule 36 (tipo -> T_INT .)
-    ARROW           reduce using rule 36 (tipo -> T_INT .)
-    SEMICOLON       reduce using rule 36 (tipo -> T_INT .)
+    ASSIGN          reduce using rule 36 (tipo -> T_BOOL .)
+    ARROW           reduce using rule 36 (tipo -> T_BOOL .)
+    SEMICOLON       reduce using rule 36 (tipo -> T_BOOL .)
 
 
 state 52
 
-    (37) tipo -> T_BOOL .
+    (33) expressao -> ID LPAREN expressao RPAREN .
 
-    ASSIGN          reduce using rule 37 (tipo -> T_BOOL .)
-    ARROW           reduce using rule 37 (tipo -> T_BOOL .)
-    SEMICOLON       reduce using rule 37 (tipo -> T_BOOL .)
+    SEMICOLON       reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    SUM             reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    SUBTRACTION     reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    PRODUCT         reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    BAR             reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    EQUAL           reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    LESS            reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    GREATER         reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    RPAREN          reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    THEN            reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
+    ELSE            reduce using rule 33 (expressao -> ID LPAREN expressao RPAREN .)
 
 
 state 53
 
-    (7) let_statement -> LET ID ASSIGN expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (8) fun_statement -> FUN ID COLON tipo . ARROW tipo
 
-    SEMICOLON       reduce using rule 7 (let_statement -> LET ID ASSIGN expressao .)
-    SUM             shift and go to state 20
-    SUBTRACTION     shift and go to state 21
-    PRODUCT         shift and go to state 22
-    BAR             shift and go to state 23
-    EQUAL           shift and go to state 24
-    LESS            shift and go to state 25
-    GREATER         shift and go to state 26
+    ARROW           shift and go to state 58
 
 
 state 54
 
-    (34) expressao -> ID LPAREN expressao RPAREN .
+    (9) expressao -> WHEN LPAREN expressao RPAREN . IS cases END
 
-    SEMICOLON       reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    SUM             reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    SUBTRACTION     reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    PRODUCT         reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    BAR             reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    EQUAL           reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    LESS            reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    GREATER         reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    RPAREN          reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    THEN            reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
-    ELSE            reduce using rule 34 (expressao -> ID LPAREN expressao RPAREN .)
+    IS              shift and go to state 59
 
 
 state 55
 
-    (9) fun_statement -> FUN ID COLON tipo . ARROW tipo
+    (28) expressao -> IF expressao THEN expressao . ELSE expressao
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    ARROW           shift and go to state 60
+    ELSE            shift and go to state 60
+    SUM             shift and go to state 20
+    SUBTRACTION     shift and go to state 21
+    PRODUCT         shift and go to state 22
+    BAR             shift and go to state 23
+    EQUAL           shift and go to state 24
+    LESS            shift and go to state 25
+    GREATER         shift and go to state 26
 
 
 state 56
 
-    (10) expressao -> WHEN LPAREN expressao RPAREN . IS cases END
+    (7) let_statement -> LET ID ID ASSIGN expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    IS              shift and go to state 61
+    SEMICOLON       reduce using rule 7 (let_statement -> LET ID ID ASSIGN expressao .)
+    SUM             shift and go to state 20
+    SUBTRACTION     shift and go to state 21
+    PRODUCT         shift and go to state 22
+    BAR             shift and go to state 23
+    EQUAL           shift and go to state 24
+    LESS            shift and go to state 25
+    GREATER         shift and go to state 26
 
 
 state 57
 
-    (29) expressao -> IF expressao THEN expressao . ELSE expressao
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (6) let_statement -> LET ID COLON tipo ASSIGN . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
-    ELSE            shift and go to state 62
-    SUM             shift and go to state 20
-    SUBTRACTION     shift and go to state 21
-    PRODUCT         shift and go to state 22
-    BAR             shift and go to state 23
-    EQUAL           shift and go to state 24
-    LESS            shift and go to state 25
-    GREATER         shift and go to state 26
+    WHEN            shift and go to state 9
+    IF              shift and go to state 12
+    LPAREN          shift and go to state 10
+    INT             shift and go to state 13
+    TRUE            shift and go to state 14
+    FALSE           shift and go to state 15
+    ID              shift and go to state 7
+    SUBTRACTION     shift and go to state 11
 
+    expressao                      shift and go to state 61
 
 state 58
 
-    (8) let_statement -> LET ID ID ASSIGN expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (8) fun_statement -> FUN ID COLON tipo ARROW . tipo
+    (35) tipo -> . T_INT
+    (36) tipo -> . T_BOOL
 
-    SEMICOLON       reduce using rule 8 (let_statement -> LET ID ID ASSIGN expressao .)
-    SUM             shift and go to state 20
-    SUBTRACTION     shift and go to state 21
-    PRODUCT         shift and go to state 22
-    BAR             shift and go to state 23
-    EQUAL           shift and go to state 24
-    LESS            shift and go to state 25
-    GREATER         shift and go to state 26
+    T_INT           shift and go to state 50
+    T_BOOL          shift and go to state 51
 
+    tipo                           shift and go to state 62
 
 state 59
 
-    (6) let_statement -> LET ID COLON tipo ASSIGN . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (9) expressao -> WHEN LPAREN expressao RPAREN IS . cases END
+    (10) cases -> . case
+    (11) cases -> . cases case
+    (12) case -> . pattern_list ARROW expressao SEMICOLON
+    (13) case -> . UNDERSCORE ARROW expressao SEMICOLON
+    (14) pattern_list -> . pattern
+    (15) pattern_list -> . pattern_list COMMA pattern
+    (16) pattern -> . INT
+    (17) pattern -> . SUBTRACTION INT
+    (18) pattern -> . TRUE
+    (19) pattern -> . FALSE
+    (20) pattern -> . ID
 
-    WHEN            shift and go to state 9
-    IF              shift and go to state 12
-    LPAREN          shift and go to state 10
-    INT             shift and go to state 13
-    TRUE            shift and go to state 14
-    FALSE           shift and go to state 15
-    ID              shift and go to state 7
-    SUBTRACTION     shift and go to state 11
+    UNDERSCORE      shift and go to state 66
+    INT             shift and go to state 68
+    SUBTRACTION     shift and go to state 69
+    TRUE            shift and go to state 70
+    FALSE           shift and go to state 71
+    ID              shift and go to state 72
 
-    expressao                      shift and go to state 63
+    cases                          shift and go to state 63
+    case                           shift and go to state 64
+    pattern_list                   shift and go to state 65
+    pattern                        shift and go to state 67
 
 state 60
 
-    (9) fun_statement -> FUN ID COLON tipo ARROW . tipo
-    (36) tipo -> . T_INT
-    (37) tipo -> . T_BOOL
-
-    T_INT           shift and go to state 51
-    T_BOOL          shift and go to state 52
-
-    tipo                           shift and go to state 64
-
-state 61
-
-    (10) expressao -> WHEN LPAREN expressao RPAREN IS . cases END
-    (11) cases -> . case
-    (12) cases -> . cases case
-    (13) case -> . pattern_list ARROW expressao SEMICOLON
-    (14) case -> . UNDERSCORE ARROW expressao SEMICOLON
-    (15) pattern_list -> . pattern
-    (16) pattern_list -> . pattern_list COMMA pattern
-    (17) pattern -> . INT
-    (18) pattern -> . SUBTRACTION INT
-    (19) pattern -> . TRUE
-    (20) pattern -> . FALSE
-    (21) pattern -> . ID
-
-    UNDERSCORE      shift and go to state 68
-    INT             shift and go to state 70
-    SUBTRACTION     shift and go to state 71
-    TRUE            shift and go to state 72
-    FALSE           shift and go to state 73
-    ID              shift and go to state 74
-
-    cases                          shift and go to state 65
-    case                           shift and go to state 66
-    pattern_list                   shift and go to state 67
-    pattern                        shift and go to state 69
-
-state 62
-
-    (29) expressao -> IF expressao THEN expressao ELSE . expressao
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (28) expressao -> IF expressao THEN expressao ELSE . expressao
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -1479,18 +1421,18 @@ state 62
     ID              shift and go to state 7
     SUBTRACTION     shift and go to state 11
 
-    expressao                      shift and go to state 75
+    expressao                      shift and go to state 73
 
-state 63
+state 61
 
     (6) let_statement -> LET ID COLON tipo ASSIGN expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
     SEMICOLON       reduce using rule 6 (let_statement -> LET ID COLON tipo ASSIGN expressao .)
     SUM             shift and go to state 20
@@ -1502,125 +1444,125 @@ state 63
     GREATER         shift and go to state 26
 
 
+state 62
+
+    (8) fun_statement -> FUN ID COLON tipo ARROW tipo .
+
+    SEMICOLON       reduce using rule 8 (fun_statement -> FUN ID COLON tipo ARROW tipo .)
+
+
+state 63
+
+    (9) expressao -> WHEN LPAREN expressao RPAREN IS cases . END
+    (11) cases -> cases . case
+    (12) case -> . pattern_list ARROW expressao SEMICOLON
+    (13) case -> . UNDERSCORE ARROW expressao SEMICOLON
+    (14) pattern_list -> . pattern
+    (15) pattern_list -> . pattern_list COMMA pattern
+    (16) pattern -> . INT
+    (17) pattern -> . SUBTRACTION INT
+    (18) pattern -> . TRUE
+    (19) pattern -> . FALSE
+    (20) pattern -> . ID
+
+    END             shift and go to state 74
+    UNDERSCORE      shift and go to state 66
+    INT             shift and go to state 68
+    SUBTRACTION     shift and go to state 69
+    TRUE            shift and go to state 70
+    FALSE           shift and go to state 71
+    ID              shift and go to state 72
+
+    case                           shift and go to state 75
+    pattern_list                   shift and go to state 65
+    pattern                        shift and go to state 67
+
 state 64
 
-    (9) fun_statement -> FUN ID COLON tipo ARROW tipo .
+    (10) cases -> case .
 
-    SEMICOLON       reduce using rule 9 (fun_statement -> FUN ID COLON tipo ARROW tipo .)
+    END             reduce using rule 10 (cases -> case .)
+    UNDERSCORE      reduce using rule 10 (cases -> case .)
+    INT             reduce using rule 10 (cases -> case .)
+    SUBTRACTION     reduce using rule 10 (cases -> case .)
+    TRUE            reduce using rule 10 (cases -> case .)
+    FALSE           reduce using rule 10 (cases -> case .)
+    ID              reduce using rule 10 (cases -> case .)
 
 
 state 65
 
-    (10) expressao -> WHEN LPAREN expressao RPAREN IS cases . END
-    (12) cases -> cases . case
-    (13) case -> . pattern_list ARROW expressao SEMICOLON
-    (14) case -> . UNDERSCORE ARROW expressao SEMICOLON
-    (15) pattern_list -> . pattern
-    (16) pattern_list -> . pattern_list COMMA pattern
-    (17) pattern -> . INT
-    (18) pattern -> . SUBTRACTION INT
-    (19) pattern -> . TRUE
-    (20) pattern -> . FALSE
-    (21) pattern -> . ID
+    (12) case -> pattern_list . ARROW expressao SEMICOLON
+    (15) pattern_list -> pattern_list . COMMA pattern
 
-    END             shift and go to state 76
-    UNDERSCORE      shift and go to state 68
-    INT             shift and go to state 70
-    SUBTRACTION     shift and go to state 71
-    TRUE            shift and go to state 72
-    FALSE           shift and go to state 73
-    ID              shift and go to state 74
+    ARROW           shift and go to state 76
+    COMMA           shift and go to state 77
 
-    case                           shift and go to state 77
-    pattern_list                   shift and go to state 67
-    pattern                        shift and go to state 69
 
 state 66
 
-    (11) cases -> case .
+    (13) case -> UNDERSCORE . ARROW expressao SEMICOLON
 
-    END             reduce using rule 11 (cases -> case .)
-    UNDERSCORE      reduce using rule 11 (cases -> case .)
-    INT             reduce using rule 11 (cases -> case .)
-    SUBTRACTION     reduce using rule 11 (cases -> case .)
-    TRUE            reduce using rule 11 (cases -> case .)
-    FALSE           reduce using rule 11 (cases -> case .)
-    ID              reduce using rule 11 (cases -> case .)
+    ARROW           shift and go to state 78
 
 
 state 67
 
-    (13) case -> pattern_list . ARROW expressao SEMICOLON
-    (16) pattern_list -> pattern_list . COMMA pattern
+    (14) pattern_list -> pattern .
 
-    ARROW           shift and go to state 78
-    COMMA           shift and go to state 79
+    ARROW           reduce using rule 14 (pattern_list -> pattern .)
+    COMMA           reduce using rule 14 (pattern_list -> pattern .)
 
 
 state 68
 
-    (14) case -> UNDERSCORE . ARROW expressao SEMICOLON
+    (16) pattern -> INT .
 
-    ARROW           shift and go to state 80
+    ARROW           reduce using rule 16 (pattern -> INT .)
+    COMMA           reduce using rule 16 (pattern -> INT .)
 
 
 state 69
 
-    (15) pattern_list -> pattern .
+    (17) pattern -> SUBTRACTION . INT
 
-    ARROW           reduce using rule 15 (pattern_list -> pattern .)
-    COMMA           reduce using rule 15 (pattern_list -> pattern .)
+    INT             shift and go to state 79
 
 
 state 70
 
-    (17) pattern -> INT .
+    (18) pattern -> TRUE .
 
-    ARROW           reduce using rule 17 (pattern -> INT .)
-    COMMA           reduce using rule 17 (pattern -> INT .)
+    ARROW           reduce using rule 18 (pattern -> TRUE .)
+    COMMA           reduce using rule 18 (pattern -> TRUE .)
 
 
 state 71
 
-    (18) pattern -> SUBTRACTION . INT
+    (19) pattern -> FALSE .
 
-    INT             shift and go to state 81
+    ARROW           reduce using rule 19 (pattern -> FALSE .)
+    COMMA           reduce using rule 19 (pattern -> FALSE .)
 
 
 state 72
 
-    (19) pattern -> TRUE .
+    (20) pattern -> ID .
 
-    ARROW           reduce using rule 19 (pattern -> TRUE .)
-    COMMA           reduce using rule 19 (pattern -> TRUE .)
+    ARROW           reduce using rule 20 (pattern -> ID .)
+    COMMA           reduce using rule 20 (pattern -> ID .)
 
 
 state 73
 
-    (20) pattern -> FALSE .
-
-    ARROW           reduce using rule 20 (pattern -> FALSE .)
-    COMMA           reduce using rule 20 (pattern -> FALSE .)
-
-
-state 74
-
-    (21) pattern -> ID .
-
-    ARROW           reduce using rule 21 (pattern -> ID .)
-    COMMA           reduce using rule 21 (pattern -> ID .)
-
-
-state 75
-
-    (29) expressao -> IF expressao THEN expressao ELSE expressao .
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (28) expressao -> IF expressao THEN expressao ELSE expressao .
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
   ! shift/reduce conflict for SUM resolved as shift
   ! shift/reduce conflict for SUBTRACTION resolved as shift
@@ -1629,10 +1571,10 @@ state 75
   ! shift/reduce conflict for EQUAL resolved as shift
   ! shift/reduce conflict for LESS resolved as shift
   ! shift/reduce conflict for GREATER resolved as shift
-    SEMICOLON       reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .)
-    RPAREN          reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .)
-    THEN            reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .)
-    ELSE            reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .)
+    SEMICOLON       reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .)
+    RPAREN          reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .)
+    THEN            reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .)
+    ELSE            reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .)
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
@@ -1641,64 +1583,112 @@ state 75
     LESS            shift and go to state 25
     GREATER         shift and go to state 26
 
-  ! SUM             [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! SUBTRACTION     [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! PRODUCT         [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! BAR             [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! EQUAL           [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! LESS            [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
-  ! GREATER         [ reduce using rule 29 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! SUM             [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! SUBTRACTION     [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! PRODUCT         [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! BAR             [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! EQUAL           [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! LESS            [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+  ! GREATER         [ reduce using rule 28 (expressao -> IF expressao THEN expressao ELSE expressao .) ]
+
+
+state 74
+
+    (9) expressao -> WHEN LPAREN expressao RPAREN IS cases END .
+
+    SEMICOLON       reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    SUM             reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    SUBTRACTION     reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    PRODUCT         reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    BAR             reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    EQUAL           reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    LESS            reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    GREATER         reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    RPAREN          reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    THEN            reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    ELSE            reduce using rule 9 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+
+
+state 75
+
+    (11) cases -> cases case .
+
+    END             reduce using rule 11 (cases -> cases case .)
+    UNDERSCORE      reduce using rule 11 (cases -> cases case .)
+    INT             reduce using rule 11 (cases -> cases case .)
+    SUBTRACTION     reduce using rule 11 (cases -> cases case .)
+    TRUE            reduce using rule 11 (cases -> cases case .)
+    FALSE           reduce using rule 11 (cases -> cases case .)
+    ID              reduce using rule 11 (cases -> cases case .)
 
 
 state 76
 
-    (10) expressao -> WHEN LPAREN expressao RPAREN IS cases END .
+    (12) case -> pattern_list ARROW . expressao SEMICOLON
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
-    SEMICOLON       reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    SUM             reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    SUBTRACTION     reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    PRODUCT         reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    BAR             reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    EQUAL           reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    LESS            reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    GREATER         reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    RPAREN          reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    THEN            reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
-    ELSE            reduce using rule 10 (expressao -> WHEN LPAREN expressao RPAREN IS cases END .)
+    WHEN            shift and go to state 9
+    IF              shift and go to state 12
+    LPAREN          shift and go to state 10
+    INT             shift and go to state 13
+    TRUE            shift and go to state 14
+    FALSE           shift and go to state 15
+    ID              shift and go to state 7
+    SUBTRACTION     shift and go to state 11
 
+    expressao                      shift and go to state 80
 
 state 77
 
-    (12) cases -> cases case .
+    (15) pattern_list -> pattern_list COMMA . pattern
+    (16) pattern -> . INT
+    (17) pattern -> . SUBTRACTION INT
+    (18) pattern -> . TRUE
+    (19) pattern -> . FALSE
+    (20) pattern -> . ID
 
-    END             reduce using rule 12 (cases -> cases case .)
-    UNDERSCORE      reduce using rule 12 (cases -> cases case .)
-    INT             reduce using rule 12 (cases -> cases case .)
-    SUBTRACTION     reduce using rule 12 (cases -> cases case .)
-    TRUE            reduce using rule 12 (cases -> cases case .)
-    FALSE           reduce using rule 12 (cases -> cases case .)
-    ID              reduce using rule 12 (cases -> cases case .)
+    INT             shift and go to state 68
+    SUBTRACTION     shift and go to state 69
+    TRUE            shift and go to state 70
+    FALSE           shift and go to state 71
+    ID              shift and go to state 72
 
+    pattern                        shift and go to state 81
 
 state 78
 
-    (13) case -> pattern_list ARROW . expressao SEMICOLON
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (13) case -> UNDERSCORE ARROW . expressao SEMICOLON
+    (9) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
+    (21) expressao -> . expressao SUM expressao
+    (22) expressao -> . expressao SUBTRACTION expressao
+    (23) expressao -> . expressao PRODUCT expressao
+    (24) expressao -> . expressao BAR expressao
+    (25) expressao -> . expressao EQUAL expressao
+    (26) expressao -> . expressao LESS expressao
+    (27) expressao -> . expressao GREATER expressao
+    (28) expressao -> . IF expressao THEN expressao ELSE expressao
+    (29) expressao -> . LPAREN expressao RPAREN
+    (30) expressao -> . INT
+    (31) expressao -> . TRUE
+    (32) expressao -> . FALSE
+    (33) expressao -> . ID LPAREN expressao RPAREN
+    (34) expressao -> . ID
+    (37) expressao -> . SUBTRACTION expressao
 
     WHEN            shift and go to state 9
     IF              shift and go to state 12
@@ -1713,72 +1703,53 @@ state 78
 
 state 79
 
-    (16) pattern_list -> pattern_list COMMA . pattern
-    (17) pattern -> . INT
-    (18) pattern -> . SUBTRACTION INT
-    (19) pattern -> . TRUE
-    (20) pattern -> . FALSE
-    (21) pattern -> . ID
+    (17) pattern -> SUBTRACTION INT .
 
-    INT             shift and go to state 70
-    SUBTRACTION     shift and go to state 71
-    TRUE            shift and go to state 72
-    FALSE           shift and go to state 73
-    ID              shift and go to state 74
+    ARROW           reduce using rule 17 (pattern -> SUBTRACTION INT .)
+    COMMA           reduce using rule 17 (pattern -> SUBTRACTION INT .)
 
-    pattern                        shift and go to state 83
 
 state 80
 
-    (14) case -> UNDERSCORE ARROW . expressao SEMICOLON
-    (10) expressao -> . WHEN LPAREN expressao RPAREN IS cases END
-    (22) expressao -> . expressao SUM expressao
-    (23) expressao -> . expressao SUBTRACTION expressao
-    (24) expressao -> . expressao PRODUCT expressao
-    (25) expressao -> . expressao BAR expressao
-    (26) expressao -> . expressao EQUAL expressao
-    (27) expressao -> . expressao LESS expressao
-    (28) expressao -> . expressao GREATER expressao
-    (29) expressao -> . IF expressao THEN expressao ELSE expressao
-    (30) expressao -> . LPAREN expressao RPAREN
-    (31) expressao -> . INT
-    (32) expressao -> . TRUE
-    (33) expressao -> . FALSE
-    (34) expressao -> . ID LPAREN expressao RPAREN
-    (35) expressao -> . ID
-    (38) expressao -> . SUBTRACTION expressao
+    (12) case -> pattern_list ARROW expressao . SEMICOLON
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    WHEN            shift and go to state 9
-    IF              shift and go to state 12
-    LPAREN          shift and go to state 10
-    INT             shift and go to state 13
-    TRUE            shift and go to state 14
-    FALSE           shift and go to state 15
-    ID              shift and go to state 7
-    SUBTRACTION     shift and go to state 11
+    SEMICOLON       shift and go to state 83
+    SUM             shift and go to state 20
+    SUBTRACTION     shift and go to state 21
+    PRODUCT         shift and go to state 22
+    BAR             shift and go to state 23
+    EQUAL           shift and go to state 24
+    LESS            shift and go to state 25
+    GREATER         shift and go to state 26
 
-    expressao                      shift and go to state 84
 
 state 81
 
-    (18) pattern -> SUBTRACTION INT .
+    (15) pattern_list -> pattern_list COMMA pattern .
 
-    ARROW           reduce using rule 18 (pattern -> SUBTRACTION INT .)
-    COMMA           reduce using rule 18 (pattern -> SUBTRACTION INT .)
+    ARROW           reduce using rule 15 (pattern_list -> pattern_list COMMA pattern .)
+    COMMA           reduce using rule 15 (pattern_list -> pattern_list COMMA pattern .)
 
 
 state 82
 
-    (13) case -> pattern_list ARROW expressao . SEMICOLON
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (13) case -> UNDERSCORE ARROW expressao . SEMICOLON
+    (21) expressao -> expressao . SUM expressao
+    (22) expressao -> expressao . SUBTRACTION expressao
+    (23) expressao -> expressao . PRODUCT expressao
+    (24) expressao -> expressao . BAR expressao
+    (25) expressao -> expressao . EQUAL expressao
+    (26) expressao -> expressao . LESS expressao
+    (27) expressao -> expressao . GREATER expressao
 
-    SEMICOLON       shift and go to state 85
+    SEMICOLON       shift and go to state 84
     SUM             shift and go to state 20
     SUBTRACTION     shift and go to state 21
     PRODUCT         shift and go to state 22
@@ -1790,65 +1761,36 @@ state 82
 
 state 83
 
-    (16) pattern_list -> pattern_list COMMA pattern .
+    (12) case -> pattern_list ARROW expressao SEMICOLON .
 
-    ARROW           reduce using rule 16 (pattern_list -> pattern_list COMMA pattern .)
-    COMMA           reduce using rule 16 (pattern_list -> pattern_list COMMA pattern .)
+    END             reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    UNDERSCORE      reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    INT             reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    SUBTRACTION     reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    TRUE            reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    FALSE           reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
+    ID              reduce using rule 12 (case -> pattern_list ARROW expressao SEMICOLON .)
 
 
 state 84
 
-    (14) case -> UNDERSCORE ARROW expressao . SEMICOLON
-    (22) expressao -> expressao . SUM expressao
-    (23) expressao -> expressao . SUBTRACTION expressao
-    (24) expressao -> expressao . PRODUCT expressao
-    (25) expressao -> expressao . BAR expressao
-    (26) expressao -> expressao . EQUAL expressao
-    (27) expressao -> expressao . LESS expressao
-    (28) expressao -> expressao . GREATER expressao
+    (13) case -> UNDERSCORE ARROW expressao SEMICOLON .
 
-    SEMICOLON       shift and go to state 86
-    SUM             shift and go to state 20
-    SUBTRACTION     shift and go to state 21
-    PRODUCT         shift and go to state 22
-    BAR             shift and go to state 23
-    EQUAL           shift and go to state 24
-    LESS            shift and go to state 25
-    GREATER         shift and go to state 26
-
-
-state 85
-
-    (13) case -> pattern_list ARROW expressao SEMICOLON .
-
-    END             reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    UNDERSCORE      reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    INT             reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    SUBTRACTION     reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    TRUE            reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    FALSE           reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-    ID              reduce using rule 13 (case -> pattern_list ARROW expressao SEMICOLON .)
-
-
-state 86
-
-    (14) case -> UNDERSCORE ARROW expressao SEMICOLON .
-
-    END             reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    UNDERSCORE      reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    INT             reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    SUBTRACTION     reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    TRUE            reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    FALSE           reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
-    ID              reduce using rule 14 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    END             reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    UNDERSCORE      reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    INT             reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    SUBTRACTION     reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    TRUE            reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    FALSE           reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
+    ID              reduce using rule 13 (case -> UNDERSCORE ARROW expressao SEMICOLON .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for SUM in state 75 resolved as shift
-WARNING: shift/reduce conflict for SUBTRACTION in state 75 resolved as shift
-WARNING: shift/reduce conflict for PRODUCT in state 75 resolved as shift
-WARNING: shift/reduce conflict for BAR in state 75 resolved as shift
-WARNING: shift/reduce conflict for EQUAL in state 75 resolved as shift
-WARNING: shift/reduce conflict for LESS in state 75 resolved as shift
-WARNING: shift/reduce conflict for GREATER in state 75 resolved as shift
+WARNING: shift/reduce conflict for SUM in state 73 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACTION in state 73 resolved as shift
+WARNING: shift/reduce conflict for PRODUCT in state 73 resolved as shift
+WARNING: shift/reduce conflict for BAR in state 73 resolved as shift
+WARNING: shift/reduce conflict for EQUAL in state 73 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 73 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 73 resolved as shift

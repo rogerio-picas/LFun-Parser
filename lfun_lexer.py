@@ -76,15 +76,3 @@ def t_error(t):
 
 # Construir o lexer
 lexer = lex.lex()
-
-if __name__ == "__main__":
-    data = '''
-    -- Teste de variáveis
-    let base: Int = 10;
-    {- Teste de
-       expressões -}
-    let check: Bool = base > 5;
-    '''
-    lexer.input(data)
-    for tok in lexer:
-        print(tok)

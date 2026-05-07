@@ -24,12 +24,9 @@ def p_instrucao(p):
 # --- LET (Definição) ---
 def p_let_statement(p):
     '''let_statement : LET ID COLON tipo ASSIGN expressao
-                     | LET ID ASSIGN expressao
                      | LET ID ID ASSIGN expressao'''
     if len(p) == 7:
         p[0] = ('let', p[2], p[4], p[6])
-    elif len(p) == 5:
-        p[0] = ('let', p[2], None, p[4])
     else:
         p[0] = ('fun_def', p[2], p[3], p[5])
 

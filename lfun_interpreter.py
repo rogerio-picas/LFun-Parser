@@ -1,3 +1,10 @@
+def get_lfun_type(val):
+    if isinstance(val, bool): return "Bool"
+    if isinstance(val, int): return "Int"
+    if isinstance(val, str) and val.startswith("<fun"): return "Function"
+    if isinstance(val, tuple) and len(val) > 0 and val[0] == 'closure': return "Function"
+    return "Unknown"
+
 class LFunInterpreter:
     def __init__(self):
         # Tabela de Símbolos Global: nome -> valor
@@ -34,27 +41,44 @@ class LFunInterpreter:
             op = node[1]
             left = self.evaluate(node[2], local_env)
             right = self.evaluate(node[3], local_env)
-            try:
+            
+            type_left = get_lfun_type(left)
+            type_right = get_lfun_type(right)
+            
+            if op in ('+', '-', '*', '/'):
+                if type_left != 'Int' or type_right != 'Int':
+                    raise Exception(f"Erro de Tipos: Operação '{op}' requer operandos do tipo 'Int', mas recebeu '{type_left}' e '{type_right}'")
+                if op == '/' and right == 0:
+                    raise Exception("Erro de Execução: Divisão por zero.")
                 if op == '+': return left + right
                 if op == '-': return left - right
                 if op == '*': return left * right
-                if op == '/': return left / right
-                if op == '==': return left == right
+                if op == '/': return left // right # Divisão inteira conforme LFun
+                
+            elif op in ('<', '>'):
+                if type_left != 'Int' or type_right != 'Int':
+                    raise Exception(f"Erro de Tipos: Operação '{op}' requer operandos do tipo 'Int', mas recebeu '{type_left}' e '{type_right}'")
                 if op == '<': return left < right
                 if op == '>': return left > right
-            except TypeError:
-                raise Exception(f"Erro de Tipos: Operação '{op}' inválida para {type(left)} e {type(right)}")
+                
+            elif op == '==':
+                if type_left != type_right:
+                    raise Exception(f"Erro de Tipos: Operação '==' requer operandos do mesmo tipo, mas recebeu '{type_left}' e '{type_right}'")
+                return left == right
 
         # --- Operações Unárias ---
         if tag == 'unop':
             val = self.evaluate(node[2], local_env)
+            type_val = get_lfun_type(val)
+            if type_val != 'Int':
+                raise Exception(f"Erro de Tipos: Operação '-' unária requer operando do tipo 'Int', mas recebeu '{type_val}'")
             return -val
 
         # --- Condicional IF ---
         if tag == 'if':
             cond = self.evaluate(node[1], local_env)
             if not isinstance(cond, bool):
-                raise Exception("Erro: Condição do IF deve ser Booleana.")
+                raise Exception("Erro de Tipos: Condição do IF deve ser Booleana.")
             if cond:
                 return self.evaluate(node[2], local_env)
             else:
@@ -63,8 +87,20 @@ class LFunInterpreter:
         # --- Definições (LET) ---
         if tag == 'let':
             name = node[1]
-            # node[2] é o tipo (ignorado aqui, mas usado na análise semântica real)
+            declared_type = node[2]
+            
+            # Enforce single definition / immutability
+            if name in self.env:
+                raise Exception(f"Erro Semântico: Identificador '{name}' já foi definido e é imutável.")
+                
             value = self.evaluate(node[3], local_env)
+            
+            # Enforce type checking
+            if declared_type is not None:
+                actual_type = get_lfun_type(value)
+                if actual_type != declared_type:
+                    raise Exception(f"Erro de Tipos: O identificador '{name}' foi declarado como '{declared_type}', mas a expressão avaliada tem o tipo '{actual_type}'.")
+            
             self.env[name] = value
             return value
 
@@ -79,6 +115,11 @@ class LFunInterpreter:
             name = node[1]
             param = node[2]
             body = node[3]
+            
+            # Enforce single definition / immutability for functions as well
+            if name in self.env:
+                raise Exception(f"Erro Semântico: Função/Identificador '{name}' já foi definido e é imutável.")
+                
             self.env[name] = ('closure', param, body)
             return f"<fun {name}>"
 
