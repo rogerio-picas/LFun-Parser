@@ -71,11 +71,13 @@ def p_pattern_list(p):
 
 def p_pattern(p):
     '''pattern : INT
+               | FLOAT
                | SUBTRACTION INT
+               | SUBTRACTION FLOAT
                | TRUE
                | FALSE
                | ID'''
-    if len(p) == 3: # Sinal de menos + Inteiro
+    if len(p) == 3: # Sinal de menos
         p[0] = -p[2]
     else:
         p[0] = p[1]
@@ -103,6 +105,10 @@ def p_expressao_inteiro(p):
     '''expressao : INT'''
     p[0] = ('int', p[1])
 
+def p_expressao_float(p):
+    '''expressao : FLOAT'''
+    p[0] = ('float', p[1])
+
 def p_expressao_bool(p):
     '''expressao : TRUE
                  | FALSE'''
@@ -118,6 +124,7 @@ def p_expressao_id(p):
 
 def p_tipo(p):
     '''tipo : T_INT
+           | T_FLOAT
            | T_BOOL'''
     p[0] = p[1]
 

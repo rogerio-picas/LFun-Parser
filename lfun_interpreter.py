@@ -19,6 +19,9 @@ class LFunInterpreter:
         if tag == 'int':
             return node[1]
         
+        if tag == 'float':
+            return node[1]
+        
         if tag == 'bool':
             return True if node[1] == 'true' else False
 
@@ -38,7 +41,15 @@ class LFunInterpreter:
                 if op == '+': return left + right
                 if op == '-': return left - right
                 if op == '*': return left * right
-                if op == '/': return left / right
+                if op == '/':
+                    # Smart division: return int if no remainder, else return float
+                    if isinstance(left, int) and isinstance(right, int):
+                        if left % right == 0:
+                            return left // right
+                        else:
+                            return left / right
+                    else:
+                        return left / right
                 if op == '==': return left == right
                 if op == '<': return left < right
                 if op == '>': return left > right

@@ -11,6 +11,7 @@ reserved = {
     'is': 'IS',
     'end': 'END',
     'Int': 'T_INT',
+    'Float': 'T_FLOAT',
     'Bool': 'T_BOOL',
     'true': 'TRUE',
     'false': 'FALSE'
@@ -18,7 +19,7 @@ reserved = {
 
 # 2. Agora já podes montar a lista de tokens
 tokens = [
-    'ID', 'INT',
+    'ID', 'INT', 'FLOAT',
     'SUM', 'SUBTRACTION', 'PRODUCT', 'BAR',
     'EQUAL', 'LESS', 'GREATER',
     'LPAREN', 'RPAREN', 'UNDERSCORE',
@@ -52,7 +53,12 @@ def t_COMMENT_SINGLE(t):
     r'--.*'
     pass # Ignora o conteúdo
 
-# 5. Regras para tokens complexos (INT e ID)
+# 5. Regras para tokens complexos (FLOAT, INT e ID)
+def t_FLOAT(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
 def t_INT(t):
     r'\d+'
     t.value = int(t.value)

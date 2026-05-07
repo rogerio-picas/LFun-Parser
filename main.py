@@ -5,6 +5,7 @@ from lfun_interpreter import LFunInterpreter
 def get_lfun_type(val):
     if isinstance(val, bool): return "Bool"
     if isinstance(val, int): return "Int"
+    if isinstance(val, float): return "Float"
     if isinstance(val, str) and val.startswith("<fun"): return "Function"
     return "Unknown"
 
