@@ -73,8 +73,13 @@ Ficheiro .lf  (texto puro)
 ## Como Executar
 
 ```bash
+# Criar e activar ambiente virtual (recomendado)
+python3 -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
+
 # Instalar dependências
-pip install ply pytest graphviz
+pip install -r requirements.txt
 
 # Correr um ficheiro .lf
 python main.py entrada.lf
@@ -318,5 +323,8 @@ resultado: false tipo: Bool
 | `graphviz` | Visualização gráfica da AST (opcional) |
 
 ```bash
-pip install ply pytest graphviz
+python3 -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
+pip install -r requirements.txt
 ```
