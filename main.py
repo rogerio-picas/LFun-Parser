@@ -3,12 +3,14 @@ from lfun_parser import parser
 from lfun_interpreter import LFunInterpreter
 
 def get_lfun_type(val):
+    """Devolve o tipo LFun de um valor Python como string ('Int', 'Bool', 'Function')."""
     if isinstance(val, bool): return "Bool"
     if isinstance(val, int): return "Int"
     if isinstance(val, str) and val.startswith("<fun"): return "Function"
     return "Unknown"
 
 def format_output(val):
+    """Formata um resultado da AST para exibição: 'resultado: <val> tipo: <tipo>'."""
     ltype = get_lfun_type(val)
     # Converter True/False para minúsculas
     if isinstance(val, bool):
@@ -16,6 +18,7 @@ def format_output(val):
     return f"resultado: {val} tipo: {ltype}"
 
 def main():
+    """Ponto de entrada: corre em modo ficheiro (argv[1]) ou REPL interativo."""
     interpreter = LFunInterpreter()
     # Se houver argumento, lê ficheiro, caso contrário lê terminal
     if len(sys.argv) > 1:
