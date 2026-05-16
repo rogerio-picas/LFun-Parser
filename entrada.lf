@@ -1,3 +1,28 @@
+-- ==========================================
+-- TESTES ABRANGENTES - LINGUAGEM LFUN
+-- ==========================================
+
+-- 1. Definições de variáveis (let com e sem tipo explícito)
+let a : Int = 10;
+let b = 5;
+let c : Bool = true;
+
+-- 2. Expressões Aritméticas, Lógicas e Relacionais
+let soma = a + b * 2;       -- Deve dar 20 (precedência de operadores)
+let div_int = a / b;        -- Deve dar 2
+let negacao = -a;           -- Deve dar -10
+let comp1 = (a > b);        -- Deve dar true
+let comp2 = (a == 10);      -- Deve dar true
+
+-- 3. Condicionais (if-then-else)
+let max = if a > b then a else b;  -- Deve dar 10
+
+-- 4. Funções (Assinatura, Definição e Chamada)
+fun inc : Int -> Int;
+let inc x = x + 1;
+let res_inc = inc(a);       -- Deve dar 11
+
+-- 5. Pattern Matching (when com parênteses, valores múltiplos e wildcard)
 fun avalia : Int -> Bool;
 let avalia x = 
   when ( x ) is
@@ -5,6 +30,47 @@ let avalia x =
     0     -> false ;
     _     -> true ;
   end;
+let w1 = avalia(-1);        -- Deve dar true
+let w2 = avalia(0);         -- Deve dar false
 
-let r1 = avalia(-1);
-let r2 = avalia(0);
+-- 6. Pattern Matching (when sem parênteses e com booleanos puros)
+fun inverte : Bool -> Bool;
+let inverte b_val =
+  when b_val is
+    true  -> false;
+    false -> true;
+  end;
+let inv_res = inverte(c);   -- Deve dar false
+
+{- 
+   ==========================================
+   TESTES DE ERROS SEMÂNTICOS
+   (O compilador não deve "partir", deve apenas
+   imprimir o erro formatado e continuar a execução)
+   ==========================================
+-}
+
+-- 7.1. Violação de imutabilidade (tentar redefinir variável)
+let a = 20;
+
+-- 7.2. Atribuição de tipo incompatível com o declarado
+let x : Int = false;
+
+-- 7.3. Operações aritméticas com tipos incompatíveis
+let erro_op = a + true;
+
+-- 7.4. Condicional onde os ramos devolvem tipos diferentes
+let erro_if = if true then 1 else false;
+
+-- 7.5. Violação da assinatura (a infame "função mentirosa")
+fun mentirosa : Int -> Bool;
+let mentirosa x = x + 1;
+
+-- 7.6. Chamada de função com argumento do tipo errado
+let erro_call = inc(true);
+
+-- 7.7. Variável inexistente
+let erro_var = variavel_inexistente;
+
+-- 7.8. Erro de execução: Divisão por zero
+let erro_div = a / 0;

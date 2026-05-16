@@ -24,11 +24,17 @@ def p_instrucao(p):
 # --- LET (Definição) ---
 def p_let_statement(p):
     '''let_statement : LET ID COLON tipo ASSIGN expressao
-                     | LET ID ID ASSIGN expressao'''
+                 | LET ID ID ASSIGN expressao
+                 | LET ID ASSIGN expressao'''
     if len(p) == 7:
+        # LET ID COLON tipo ASSIGN expressao
         p[0] = ('let', p[2], p[4], p[6])
-    else:
+    elif len(p) == 6:
+        # LET ID ID ASSIGN expressao
         p[0] = ('fun_def', p[2], p[3], p[5])
+    else:
+        # LET ID ASSIGN expressao (sem tipo)
+        p[0] = ('let', p[2], None, p[4])
 
 # --- FUNCTION (Assinatura) ---
 def p_fun_statement(p):
@@ -37,8 +43,15 @@ def p_fun_statement(p):
 
 # --- WHEN (Expressão) ---
 def p_expressao_when(p):
-    '''expressao : WHEN LPAREN expressao RPAREN IS cases END'''
-    p[0] = ('when', p[3], p[6])
+    '''expressao : WHEN LPAREN expressao RPAREN IS cases END
+             | WHEN expressao IS cases END'''
+             
+    if len(p) == 8:
+        # WHEN LPAREN expressao RPAREN IS cases END
+        p[0] = ('when', p[3], p[6])
+    else:
+        # WHEN expressao IS cases END
+        p[0] = ('when', p[2], p[4])
 
 def p_cases(p):
     '''cases : case
@@ -72,10 +85,14 @@ def p_pattern(p):
                | TRUE
                | FALSE
                | ID'''
-    if len(p) == 3: # Sinal de menos + Inteiro
+    if len(p) == 3:           # SUBTRACTION INT → inteiro negativo
         p[0] = -p[2]
+    elif p[1] == 'true':      # TRUE → bool Python
+        p[0] = True
+    elif p[1] == 'false':     # FALSE → bool Python
+        p[0] = False
     else:
-        p[0] = p[1]
+        p[0] = p[1]           # INT ou ID: valor literal
 
 # --- EXPRESSÕES ---
 def p_expressao_binaria(p):
@@ -86,6 +103,14 @@ def p_expressao_binaria(p):
                  | expressao EQUAL expressao
                  | expressao LESS expressao
                  | expressao GREATER expressao'''
+    
+    # if p[2] == '/' and p[3] == 0:
+    #     raise Exception("Erro de Sintaxe: Divisão por zero.")
+    
+    # if p[2] == '/' and p[1]%2==0 and p[3]%2==0:
+    #     p[1]=float(p[1])
+    #     p[3]=float(p[3])
+
     p[0] = ('binop', p[2], p[1], p[3])
 
 def p_expressao_if(p):

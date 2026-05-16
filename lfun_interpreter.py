@@ -79,10 +79,15 @@ class LFunInterpreter:
             cond = self.evaluate(node[1], local_env)
             if not isinstance(cond, bool):
                 raise Exception("Erro de Tipos: Condição do IF deve ser Booleana.")
-            if cond:
-                return self.evaluate(node[2], local_env)
-            else:
-                return self.evaluate(node[3], local_env)
+            # Ambos os ramos são avaliados para verificar compatibilidade de tipos
+            then_val = self.evaluate(node[2], local_env)
+            else_val = self.evaluate(node[3], local_env)
+            if get_lfun_type(then_val) != get_lfun_type(else_val):
+                raise Exception(
+                    f"Erro de Tipos: Os ramos do IF devem produzir valores do mesmo tipo, "
+                    f"mas 'then' devolveu '{get_lfun_type(then_val)}' e 'else' devolveu '{get_lfun_type(else_val)}'."
+                )
+            return then_val if cond else else_val
 
         # --- Definições (LET) ---
         if tag == 'let':
@@ -119,7 +124,26 @@ class LFunInterpreter:
             # Enforce single definition / immutability for functions as well
             if name in self.env:
                 raise Exception(f"Erro Semântico: Função/Identificador '{name}' já foi definido e é imutável.")
-                
+            
+            # Verificar coerência da definição com a assinatura (se existir)
+            # Avalia o corpo com um valor dummy do tipo declarado para inferir o tipo de retorno
+            if name in self.signatures:
+                expected_arg_type, expected_ret_type = self.signatures[name]
+                dummy = 0 if expected_arg_type == 'Int' else True
+                try:
+                    test_result = self.evaluate(body, {param: dummy})
+                    actual_ret_type = get_lfun_type(test_result)
+                    if actual_ret_type != expected_ret_type:
+                        raise Exception(
+                            f"Erro Semântico: A definição de '{name}' é incompatível com a sua assinatura. "
+                            f"Declarado como '{expected_arg_type} -> {expected_ret_type}', "
+                            f"mas o corpo devolve '{actual_ret_type}'."
+                        )
+                except Exception as e:
+                    # Re-lança erros de tipo; ignora erros de execução com o dummy (ex: divisão por zero)
+                    if "Erro Semântico" in str(e) or "Erro de Tipos" in str(e):
+                        raise
+            
             self.env[name] = ('closure', param, body)
             return f"<fun {name}>"
 
@@ -132,11 +156,32 @@ class LFunInterpreter:
             if not fun or not isinstance(fun, tuple) or fun[0] != 'closure':
                 raise Exception(f"Erro: '{name}' não é uma função definida.")
             
+            # Verificar tipo do argumento contra a assinatura (se existir)
+            if name in self.signatures:
+                expected_arg_type, expected_ret_type = self.signatures[name]
+                actual_arg_type = get_lfun_type(arg_val)
+                if actual_arg_type != expected_arg_type:
+                    raise Exception(
+                        f"Erro de Tipos: A função '{name}' espera um argumento do tipo "
+                        f"'{expected_arg_type}', mas recebeu '{actual_arg_type}'."
+                    )
+            
             _, param_name, body = fun
             # Contexto local: o parâmetro recebe o valor do argumento
-            # NOTA: Aqui implementamos um escopo simples (lexical scoping básico)
             new_local = {param_name: arg_val}
-            return self.evaluate(body, new_local)
+            result = self.evaluate(body, new_local)
+            
+            # Verificar tipo do valor devolvido contra a assinatura (se existir)
+            if name in self.signatures:
+                _, expected_ret_type = self.signatures[name]
+                actual_ret_type = get_lfun_type(result)
+                if actual_ret_type != expected_ret_type:
+                    raise Exception(
+                        f"Erro de Tipos: A função '{name}' foi declarada como devolvendo "
+                        f"'{expected_ret_type}', mas devolveu '{actual_ret_type}'."
+                    )
+            
+            return result
 
         # --- Seleção de Casos (WHEN) ---
         if tag == 'when':
@@ -155,7 +200,12 @@ class LFunInterpreter:
 
     def run(self, ast):
         results = []
+        errors = []
         for instr in ast:
-            res = self.evaluate(instr)
-            results.append(res)
-        return results
+            try:
+                res = self.evaluate(instr)
+                results.append(res)
+            except Exception as e:
+                errors.append(str(e))
+                results.append(None)
+        return results, errors

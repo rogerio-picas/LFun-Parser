@@ -5,6 +5,7 @@ from lfun_interpreter import LFunInterpreter
 def get_lfun_type(val):
     if isinstance(val, bool): return "Bool"
     if isinstance(val, int): return "Int"
+    if isinstance(val, float): return "Float"
     if isinstance(val, str) and val.startswith("<fun"): return "Function"
     return "Unknown"
 
@@ -15,6 +16,13 @@ def format_output(val):
         val = str(val).lower()
     return f"resultado: {val} tipo: {ltype}"
 
+def print_outputs(outputs, errors):
+    for res in outputs:
+        if res is not None and not (isinstance(res, str) and res.startswith('<fun')):
+            print(format_output(res))
+    for err in errors:
+        print(f"[Erro] {err}")
+
 def main():
     interpreter = LFunInterpreter()
     # Se houver argumento, lê ficheiro, caso contrário lê terminal
@@ -23,10 +31,8 @@ def main():
             data = f.read()
         result = parser.parse(data)
         if result is not None:
-            outputs = interpreter.run(result)
-            for res in outputs:
-                if res is not None:
-                    print(format_output(res))
+            outputs, errors = interpreter.run(result)
+            print_outputs(outputs, errors)
     else:
         while True:
             try:
@@ -36,10 +42,8 @@ def main():
             if not s: continue
             result = parser.parse(s)
             if result is not None:
-                outputs = interpreter.run(result)
-                for res in outputs:
-                    if res is not None:
-                        print(format_output(res))
+                outputs, errors = interpreter.run(result)
+                print_outputs(outputs, errors)
 
 if __name__ == "__main__":
     main()
