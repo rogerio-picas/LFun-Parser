@@ -52,8 +52,8 @@ def p_expressao_when(p):
              
     if len(p) == 8:
         # WHEN LPAREN expressao RPAREN IS cases END
-        """Expressão de pattern matching: avalia a expressão e selecciona o caso correspondente."""
-    p[0] = ('when', p[3], p[6])
+        # Expressão de pattern matching: avalia a expressão e selecciona o caso correspondente.
+        p[0] = ('when', p[3], p[6])
     else:
         # WHEN expressao IS cases END
         p[0] = ('when', p[2], p[4])
