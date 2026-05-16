@@ -7,12 +7,12 @@ def get_lfun_type(val):
 
 class LFunInterpreter:
     def __init__(self):
-        # Tabela de Símbolos Global: nome -> valor
+        """Inicializa a tabela de símbolos global e o registo de assinaturas de funções."""
         self.env = {}
-        # Assinaturas: nome -> (tipo_arg, tipo_ret)
         self.signatures = {}
 
     def evaluate(self, node, local_env=None):
+        """Avalia recursivamente um nó da AST, devolvendo o valor resultante."""
         if local_env is None:
             local_env = {}
 
@@ -199,6 +199,7 @@ class LFunInterpreter:
             raise Exception(f"Erro: Nenhum caso no 'when' corresponde ao valor {val}.")
 
     def run(self, ast):
+        """Executa todas as instruções da AST em sequência e devolve a lista de resultados."""
         results = []
         errors = []
         for instr in ast:

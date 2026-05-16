@@ -45,22 +45,26 @@ t_COMMA       = r','
 # 4. Comentários (Requisito da Secção 2.1-E)
 def t_COMMENT_MULTI(t):
     r'\{-[\s\S]*?-\}'
+    """Ignora comentários de bloco {- ... -} e actualiza o contador de linhas."""
     t.lexer.lineno += t.value.count('\n')
-    pass # Ignora o conteúdo
+    pass
 
 def t_COMMENT_SINGLE(t):
     r'--.*'
-    pass # Ignora o conteúdo
+    """Ignora comentários de linha -- até ao fim da linha."""
+    pass
 
 # 5. Regras para tokens complexos (INT e ID)
 def t_INT(t):
     r'\d+'
+    """Reconhece literais inteiros e converte o valor de string para int Python."""
     t.value = int(t.value)
     return t
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
-    t.type = reserved.get(t.value, 'ID') # Crucial para distinguir de palavras reservadas
+    """Reconhece identificadores e classifica-os como palavra reservada se aplicável."""
+    t.type = reserved.get(t.value, 'ID')
     return t
 
 # 6. Caracteres ignorados e tratamento de erros
@@ -68,9 +72,11 @@ t_ignore = ' \t'
 
 def t_newline(t):
     r'\n+'
+    """Actualiza o contador de linhas ao encontrar uma ou mais quebras de linha."""
     t.lexer.lineno += len(t.value)
 
 def t_error(t):
+    """Reporta um caractere ilegal e avança o lexer para continuar a análise."""
     print(f"Caractere ilegal '{t.value[0]}' na linha {t.lexer.lineno}")
     t.lexer.skip(1)
 
